@@ -1,0 +1,38 @@
+
+
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<h1>Baza danych</h1>
+<table style="width:100%">
+  <tr>
+    <th>Imię</th>
+    <th>Nazwisko</th>
+    <th>Data urodzenia</th>
+    <th>Data zgonu</th>
+    <th>Przyczyna zgonu</th>
+    <th>Nazwa miejscowości</th>
+    <th>Numer adresowy</th>
+    <th>Kwatera</th>
+    <th>Identyfikator wprowadzającego</th>
+    <th>Status wprowadzającego</th>
+  </tr>
+  {% for d in data %}
+  <tr>
+    <td>{{d['imie']}}</td>
+    <td>{{d['nazwisko']}}</td>
+    <td>{{d['data_urodzenia']}}</td>
+    <td>{{d['data_zgonu']}}</td>
+    <td>{{d['przyczyna']}}</td>
+    <td>{{d['nazwa']}}</td>
+    <td>{{d['nr_adres']}}</td>
+    <td>{{d['id_kwatera']}}</td>
+    <td>{{d['id_admina']}}</td>
+    <td>{{d['status']}}</td>
+  </tr>
+  {% endfor %}
+{% endblock %}
