@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<h1>Dodaj nowy rekord</h1>
+
+<form action="" method="post" id="form">
+
+    <label for="imie">Imię zmarłego</label>
+    <input type="text" id="imie" name="imie" value="">
+    <br></br>
+    <label for="nazwisko">Nazwisko zmarłego</label>
+    <input type="text" id="nazwisko" name="nazwisko" value="">
+    <br></br>
+    <label for="data_urodzenia">Data urodzenia</label>
+    <input type="date" id="data_urodzenia" name="data_urodzenia" value="">
+    <br></br>
+    <label for="data_zgonu">Data zgonu</label>
+    <input type="date" id="data_zgonu" name="data_zgonu" value="">
+    <br></br>
+    <label for="przyczyna">Przyczyna zgonu</label>
+    <input type="text" id="przyczyna" name="przyczyna" value="">
+    <br></br>
+    <label for="miejscowosc">Nazwa miejscowości zamieszkania zmarłego</label>
+    <input type="text" id="miejscowosc" name="miejscowosc" value="">
+    <br></br>
+    <label for="nr_adresu">Numer domu zmarłego</label>
+    <input type="text" id="nr_adresu" name="nr_adresu" value="">
+    <br></br>
+    <label for="kwatera">Kwatera gdzie pochowany jest zmarły</label>
+    <input type="text" id="kwatera" name="kwatera" value="">
+    <br></br>
+    <button type="submit">dodaj</button>
+
+</form>
+
+{% endblock %}

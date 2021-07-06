@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<h1>Nowy admin :) </h1>
+
+<form action="" method="post" id="form">
+
+    <label for="imie">Imię administratora</label>
+    <input type="text" id="imie" name="imie" value="">
+    <br></br>
+    <label for="nazwisko">Nazwisko administratora</label>
+    <input type="text" id="nazwisko" name="nazwisko" value="">
+    <br></br>
+    <label for="id_admina">Identyfikator administratora (używany jako login)</label>
+    <input type="text" id="id_admina" name="id_admina" value="">
+    <br></br>
+    <label for="status">Status administratora</label>
+    <input type="text" id="status" name="status" value="">
+    <br></br>
+    <label for="password">Hasło</label>
+    <input type="text" id="password" name="password" value="">
+    <br></br>
+    <button type="submit">dodaj</button>
+
+</form>
+
+{% endblock %}

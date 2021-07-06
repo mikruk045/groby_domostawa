@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<h1>Logowanie</h1>
+<p>{{ komunikat }}</p>
+<form method="POST" action="">
+    
+    <input type="username" name="username" placeholder="username" value="{{ request.form.username }}">
+
+    <input type="password" name="password" placeholder="password" value="{{ request.form.password }}">
+
+    <input class="btn btn-default" type="submit" value="Login">
+</form>
+
+{% endblock %}
