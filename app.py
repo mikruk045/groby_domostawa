@@ -55,6 +55,7 @@ def login():
             if (username in id_admina.values()):
                 haslo = rows_as_dicts(conn.execute(""" select haslo from administratorzy where id_admin = '{}'""".format(username)).cursor)[0]
                 if (check_password_hash(haslo['haslo'], password)):
+                    session['id_admin'] = id_admina_get[0]
                     return redirect(url_for('panel'))
                 else:
                     render_template('login.html', komunikat = komunikat)
@@ -85,7 +86,7 @@ def record():
         print(id_miejscowosci[0]['id_miejscowosci'])
         print(max_id)
 
-        conn.execute(""" insert into zmarli (id, nazwisko, imie, data_urodzenia, data_zgonu, przyczyna, id_miejscowosc, nr_adres, id_admin) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}') """.format((int(max_id[0]['max'])+1), nazwisko, imie,data_ur, data_zg, przyczyna, id_miejscowosci[0]['id_miejscowosci'], nr_adres, 'admin'))
+        conn.execute(""" insert into zmarli (id, nazwisko, imie, data_urodzenia, data_zgonu, przyczyna, id_miejscowosc, nr_adres, id_admin) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}') """.format((int(max_id[0]['max'])+1), nazwisko, imie,data_ur, data_zg, przyczyna, id_miejscowosci[0]['id_miejscowosci'], nr_adres, session['id_admin']))
         conn.execute(""" insert into zmarli_kwatery (id_kwatera, id, id_zmarly) VALUES ('{}', '{}', '{}') """.format(kwatera, (int(max_id_2[0]['max'])+1), (int(max_id[0]['max'])+1)))
     return render_template('record.html')
 
