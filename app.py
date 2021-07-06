@@ -7,11 +7,13 @@ import json
 db = SQLAlchemy(session_options={'autocommit': True})
 
 app = Flask(__name__)
+Session(app)
 app.config['SQLALCHEMY_DATABASE_URI']= "postgresql://grobydomostawa:xsw23edc@matrix.umcs.pl:5432/grobydomostawa"
 app.config['SECRET_KEY'] = 'test'
-db.init_app(app)
-Session(app)
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
 
+db.init_app(app)
 db
 
 def rows_as_dicts(cursor):
@@ -86,7 +88,7 @@ def record():
         print(id_miejscowosci[0]['id_miejscowosci'])
         print(max_id)
 
-        conn.execute(""" insert into zmarli (id, nazwisko, imie, data_urodzenia, data_zgonu, przyczyna, id_miejscowosc, nr_adres, id_admin) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}') """.format((int(max_id[0]['max'])+1), nazwisko, imie,data_ur, data_zg, przyczyna, id_miejscowosci[0]['id_miejscowosci'], nr_adres, session['id_admin']))
+        conn.execute(""" insert into zmarli (id, nazwisko, imie, data_urodzenia, data_zgonu, przyczyna, id_miejscowosc, nr_adres, id_admin) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}') """.format((int(max_id[0]['max'])+1), nazwisko, imie,data_ur, data_zg, przyczyna, id_miejscowosci[0]['id_miejscowosci'], nr_adres, session.get('id_admin')))
         conn.execute(""" insert into zmarli_kwatery (id_kwatera, id, id_zmarly) VALUES ('{}', '{}', '{}') """.format(kwatera, (int(max_id_2[0]['max'])+1), (int(max_id[0]['max'])+1)))
     return render_template('record.html')
 
