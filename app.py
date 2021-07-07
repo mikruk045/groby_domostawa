@@ -26,7 +26,7 @@ def rows_as_dicts(cursor):
 def index():
     conn = db.session.connection()
     kwatery = rows_as_dicts(conn.execute(""" select * from kwatery """).cursor)
-    data = rows_as_dicts(conn.execute(""" 
+    zmarli = rows_as_dicts(conn.execute(""" 
     select zm.imie, zm.nazwisko, zm.data_urodzenia, zm.data_zgonu, 
     miej.nazwa, kw.id_kwatera
     from zmarli zm
@@ -38,7 +38,7 @@ def index():
     
      """).cursor)
     kwatery = json.dumps(kwatery)
-    zmarli = json.dumps(data) 
+    zmarli = json.dumps(zmarli) 
     data = [kwatery, zmarli]
     return render_template('index.html', dane = data)
 
