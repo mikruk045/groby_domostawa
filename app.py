@@ -27,7 +27,7 @@ def index():
     conn = db.session.connection()
     kwatery = rows_as_dicts(conn.execute(""" select * from kwatery """).cursor)
     zmarli = rows_as_dicts(conn.execute(""" 
-    select zm.imie, zm.nazwisko, zm.data_urodzenia, zm.data_zgonu, 
+    select zm.imie, zm.nazwisko, TO_CHAR(zm.data_urodzenia, 'DD.MM.YYYY'), TO_CHAR(zm.data_zgonu, 'DD.MM.YYYY'), 
     miej.nazwa, kw.id_kwatera
     from zmarli zm
 
