@@ -95,7 +95,7 @@ def record():
 def database():
     conn = db.session.connection()
     data = rows_as_dicts(conn.execute(""" 
-    select zm.imie, zm.nazwisko, zm.data_urodzenia, zm.data_zgonu, zm.przyczyna, 
+    select zm.id, zm.imie, zm.nazwisko, zm.data_urodzenia, zm.data_zgonu, zm.przyczyna, 
     miej.nazwa, zm.nr_adres, kw.id_kwatera, ad.id_admin, ad.status
     from zmarli zm
 
