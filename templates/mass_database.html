@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<h1>Baza danych</h1>
+<table style="width:100%">
+  <tr>
+    <th>data</th>
+    <th>zamawiający</th>
+    <th>odprawiający</th>
+    <th>złożona ofiara</th>
+  </tr>
+  {% for d in data %}
+  <tr>
+    <td>{{d['data']}}</td>
+    <td>{{d['zamawiajacy']}}</td>
+    <td>{{d['odprawia']}}</td>
+    <td>{{d['ofiara']}}</td>
+  </tr>
+  {% endfor %}
+{% endblock %}

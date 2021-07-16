@@ -13,7 +13,6 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 app.config['SQLALCHEMY_DATABASE_URI']= "postgresql://grobydomostawa:xsw23edc@matrix.umcs.pl:5432/grobydomostawa"
 
-
 db.init_app(app)
 db
 
@@ -23,6 +22,16 @@ def rows_as_dicts(cursor):
 
 
 @app.route('/', methods=['GET', 'POST'])
+def index():
+    return render_template('index2.html')
+
+
+@app.route('/kontakt')
+def kontakt():
+    return render_template('kontakt.html')
+
+
+@app.route('/index', methods=['GET', 'POST'])
 def index():
     conn = db.session.connection()
     kwatery = rows_as_dicts(conn.execute(""" select * from kwatery """).cursor)
@@ -41,7 +50,6 @@ def index():
     zmarli = json.dumps(zmarli) 
     data = [kwatery, zmarli]
     return render_template('index.html', dane = data)
-
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -66,9 +74,11 @@ def login():
             render_template('login.html', komunikat = komunikat) 
     return render_template('login.html', komunikat = komunikat)
 
+
 @app.route('/panel')
 def panel():
     return render_template('panel.html')
+
 
 @app.route('/record', methods=['GET', 'POST'])
 def record():
@@ -91,6 +101,7 @@ def record():
         conn.execute(""" insert into zmarli_kwatery (id_kwatera, id, id_zmarly) VALUES ('{}', '{}', '{}') """.format(kwatera, str(int(max_id_2[0]['max'])+1), str(int(max_id[0]['max'])+1)))
     return render_template('record.html')
 
+
 @app.route('/database')
 def database():
     conn = db.session.connection()
@@ -110,6 +121,20 @@ def database():
      """).cursor)
     return render_template('database.html', data = data)
 
+
+@app.route('/mass_database', methods = ['GET', 'POST'])
+def mass_database():
+    conn = db.session.connection()
+    data = rows_as_dicts(conn.execute("""
+    
+    select * from msze
+
+    order by data
+
+    """).cursor)
+    return render_template('mass_database.html', data = data)
+
+
 @app.route('/new_admin', methods=['GET', 'POST'])
 def new_admin():
     conn = db.session.connection()
@@ -124,6 +149,7 @@ def new_admin():
         conn.execute(""" insert into administratorzy (id_admin, nazwisko, imie, status, haslo) VALUES ('{}', '{}', '{}', '{}', '{}')""".format(id_admina, nazwisko, imie, status, hash_haslo))
 
     return render_template('new_admin.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True)
