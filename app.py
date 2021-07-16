@@ -32,7 +32,7 @@ def kontakt():
 
 
 @app.route('/cmentarz', methods=['GET', 'POST'])
-def index():
+def cmentarz():
     conn = db.session.connection()
     kwatery = rows_as_dicts(conn.execute(""" select * from kwatery """).cursor)
     zmarli = rows_as_dicts(conn.execute(""" 
