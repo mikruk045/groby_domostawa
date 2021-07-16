@@ -21,9 +21,9 @@ def rows_as_dicts(cursor):
     return [dict(zip(col_names, row)) for row in cursor]
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def index():
-    return render_template('index2.html')
+    return render_template('index.html')
 
 
 @app.route('/kontakt')
@@ -31,7 +31,7 @@ def kontakt():
     return render_template('kontakt.html')
 
 
-@app.route('/index', methods=['GET', 'POST'])
+@app.route('/cmentarz', methods=['GET', 'POST'])
 def index():
     conn = db.session.connection()
     kwatery = rows_as_dicts(conn.execute(""" select * from kwatery """).cursor)
@@ -49,7 +49,7 @@ def index():
     kwatery = json.dumps(kwatery)
     zmarli = json.dumps(zmarli) 
     data = [kwatery, zmarli]
-    return render_template('index.html', dane = data)
+    return render_template('cmentarz.html', dane = data)
 
 
 @app.route('/login', methods=['GET', 'POST'])
