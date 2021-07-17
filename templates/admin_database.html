@@ -1,0 +1,22 @@
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<h1>Baza danych</h1>
+<table style="width:100%">
+  <tr>
+    <th>Identyfikator administratora</th>
+    <th>Imię</th>
+    <th>Nazwisko</th>
+    <th>Status administratora</th>
+  </tr>
+  {% for d in data %}
+  <tr>
+    <td>{{d['id_admin']}}</td>
+    <td>{{d['imie']}}</td>
+    <td>{{d['nazwisko']}}</td>
+    <td>{{d['status']}}</td>
+  </tr>
+  {% endfor %}
+{% endblock %}

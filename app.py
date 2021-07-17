@@ -8,7 +8,6 @@ import datetime
 
 db = SQLAlchemy(session_options={'autocommit': True})
 
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'test'
 app.config["SESSION_PERMANENT"] = False
@@ -117,7 +116,6 @@ def record():
         return redirect('/login')
 
 
-
 @app.route('/database')
 def database():
     conn = db.session.connection()
@@ -131,7 +129,6 @@ def database():
         inner join kwatery k on kw.id_kwatera = k.id
         inner join administratorzy ad on zm.id_admin = ad.id_admin
         inner join miejscowosci miej on zm.id_miejscowosc = miej.id_miejscowosci
-
 
         order by zm.data_zgonu;
     
@@ -154,6 +151,20 @@ def add_mass():
             data_obj = datetime.datetime.strptime(data_str, '%Y-%m-%d %H:%M')
             conn.execute(""" insert into msze (data, zamawiajacy, odprawia, ofiara) VALUES ('{}', '{}', '{}', '{}') """.format(data_obj, zamawiajacy, odprawia, ofiara))
         return render_template('add_mass.html')
+    else:
+        return redirect('/login')
+
+
+@app.route('/admin_database')
+def admin_database():
+    conn = db.session.connection()
+    if(check_user(session['id_admin']['id_admin']) == True):
+        data = rows_as_dicts(conn.execute("""
+
+        select id_admin, imie, nazwisko, status from administratorzy
+
+        """).cursor)
+        return render_template('admin_database.html', data = data)
     else:
         return redirect('/login')
 
