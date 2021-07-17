@@ -1,8 +1,10 @@
+from datetime import datetime
 from flask import Flask, render_template, url_for, redirect, request, session, jsonify, flash
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import json
+import datetime
 
 db = SQLAlchemy(session_options={'autocommit': True})
 
@@ -120,6 +122,26 @@ def database():
     
      """).cursor)
     return render_template('database.html', data = data)
+
+
+@app.route('/add_mass', methods = ['GET', 'POST'])
+def add_mass():
+    conn = db.session.connection()
+    
+    if request.method == 'POST':
+        data = request.form['data']
+        godzina = request.form['czas']
+        zamawiajacy = request.form['zamawiajacy']
+        odprawia = request.form['odprawia']
+        ofiara = request.form['ofiara']
+        data_str = data + ' ' + godzina
+
+        data_obj = datetime.datetime.strptime(data_str, '%Y-%m-%d %H:%M')
+        
+        conn.execute(""" insert into msze (data, zamawiajacy, odprawia, ofiara) VALUES ('{}', '{}', '{}', '{}') """.format(data_obj, zamawiajacy, odprawia, ofiara))
+        print('done')
+
+    return render_template('add_mass.html')
 
 
 @app.route('/mass_database', methods = ['GET', 'POST'])

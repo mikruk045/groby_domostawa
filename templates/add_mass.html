@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<h1>dodaj mszę </h1>
+
+<form action="" method="post" id="form">
+
+    <label for="data">data mszy</label>
+    <input type="date" id="data" name="data" value="">
+    <br></br>
+    <label for="czas">godzina mszy</label>
+    <input type="time" id="czas" name="czas" value="">
+    <br></br>
+    <label for="zamawiajacy">Osoba/y zamawiająca</label>
+    <input type="text" id="zamawiajacy" name="zamawiajacy" value="">
+    <br></br>
+    <label for="odprawia">odprawia</label>
+    <input type="text" id="odprawia" name="odprawia" value="">
+    <br></br>
+    <label for="ofiara">ofiara</label>
+    <input type="text" id="ofiara" name="ofiara" value="">
+    <br></br>
+    <button type="submit">dodaj</button>
+
+</form>
+
+{% endblock %}
