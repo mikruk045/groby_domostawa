@@ -154,6 +154,20 @@ def add_mass():
     else:
         return redirect('/login')
 
+
+@app.route('/admin_database')
+def admin_database():
+    conn = db.session.connection()
+    if(check_user(session['id_admin']['id_admin']) == True):
+        data = rows_as_dicts(conn.execute("""
+
+        select id_admin, imie, nazwisko, status from administratorzy
+
+        """).cursor)
+        return render_template('admin_database.html', data = data)
+    else:
+        return redirect('/login')
+
 @app.route('/mass_database', methods = ['GET', 'POST'])
 def mass_database():
     conn = db.session.connection()
