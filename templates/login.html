@@ -12,17 +12,21 @@
     <div class="siteName">Parafia pw. Matki Bożej Królowej Polski <br> <div class="siteName2">w Domostawie</div></div>
     <div class="crossIcon"><svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" 	 viewBox="0 0 2000 2000" style="enable-background:new 0 0 2000 2000;" xml:space="preserve"> <g> 	<rect x="906" y="173" width="231" height="1655"/> </g> <g> 	<rect x="476" y="611" width="1092" height="231"/> </g> </svg></div>
     <div class="loginContainerInputs">
-        <div class="loginTitle">Logowanie</div>
+        <div class="loginTitle">Panel logowania</div>
         <div>{{ komunikat }}</div>
         <form method="POST" action="">
             <div class="inputLabel">Nazwa użytkownika</div>
-            <input class="inputText" type="username" name="username" placeholder="username" value="{{ request.form.username }}">
+            <input class="inputText" type="username" name="username" placeholder="Nazwa użytkownika" value="{{ request.form.username }}">
             <!-- <br> -->
             <div class="inputLabel">Hasło</div>
-            <input class="inputText" type="password" name="password" placeholder="password" value="{{ request.form.password }}">
+            <input class="inputText" type="password" name="password" placeholder="Hasło" value="{{ request.form.password }}">
             <!-- <br> -->
             <input class="inputSubmit" class="btn btn-default" type="submit" value="Zaloguj się">
         </form>
+    </div>
+    <div class="links">
+        <a href="#"><b>&#60;</b> Cofnij</a>
+        <a href="#">Strona główna</a>
     </div>
 </div>
 {% endblock %}
