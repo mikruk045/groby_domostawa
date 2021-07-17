@@ -1,19 +1,28 @@
 {% extends 'base.html' %}
 
 {% block head %}
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/loginStyle.css">
 {% endblock %}
 
 {% block body %}
-<h1>Logowanie</h1>
-<p>{{ komunikat }}</p>
-<form method="POST" action="">
-    <!-- test -->
-    <input type="username" name="username" placeholder="username" value="{{ request.form.username }}">
-
-    <input type="password" name="password" placeholder="password" value="{{ request.form.password }}">
-
-    <input class="btn btn-default" type="submit" value="Login">
-</form>
-
+<div class="loginContainerAll">
+    <div class="siteName">Parafia pw. Matki Bożej Królowej Polski <br> <div class="siteName2">w Domostawie</div></div>
+    <div class="crossIcon"><svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" 	 viewBox="0 0 2000 2000" style="enable-background:new 0 0 2000 2000;" xml:space="preserve"> <g> 	<rect x="906" y="173" width="231" height="1655"/> </g> <g> 	<rect x="476" y="611" width="1092" height="231"/> </g> </svg></div>
+    <div class="loginContainerInputs">
+        <div class="loginTitle">Logowanie</div>
+        <div>{{ komunikat }}</div>
+        <form method="POST" action="">
+            <div class="inputLabel">Nazwa użytkownika</div>
+            <input class="inputText" type="username" name="username" placeholder="username" value="{{ request.form.username }}">
+            <!-- <br> -->
+            <div class="inputLabel">Hasło</div>
+            <input class="inputText" type="password" name="password" placeholder="password" value="{{ request.form.password }}">
+            <!-- <br> -->
+            <input class="inputSubmit" class="btn btn-default" type="submit" value="Zaloguj się">
+        </form>
+    </div>
+</div>
 {% endblock %}
