@@ -121,7 +121,7 @@ def database():
     conn = db.session.connection()
     if(check_user(session['id_admin']['id_admin']) == True):
         data = rows_as_dicts(conn.execute(""" 
-        select zm.id, zm.imie, zm.nazwisko, zm.data_urodzenia, zm.data_zgonu, zm.przyczyna, 
+        select zm.id, zm.imie, zm.nazwisko, zm.data_urodzenia, zm.data_zgonu, zm.przyczyna, zm.inf_dodat, 
         miej.nazwa, zm.nr_adres, kw.id_kwatera, zm.id_admin, ad.status
         from zmarli zm
 
@@ -136,6 +136,18 @@ def database():
         return render_template('database.html', data = data)
     else:
         return redirect('/login')
+
+
+@app.route('/database/<imie_nazwisko><rok_zgonu><miejscowosc>', methods=['GET', 'POST'])
+def admin_database_action(action):
+    conn = db.session.connection()
+    if(action == 'edytuj'):
+        #akcja
+        return 0
+    elif(action == 'usuń'):
+        #akcja
+        return 0
+
 
 @app.route('/add_mass', methods = ['GET', 'POST'])
 def add_mass():
