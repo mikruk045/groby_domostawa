@@ -105,6 +105,7 @@ table {
     table-layout:auto;
     border-collapse: collapse;
     border-spacing: 15px;
+    margin-bottom: 30px;
 }
 
 table, td, th {
@@ -162,6 +163,51 @@ td {
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     height: auto;
+}
+
+.paginatorDiv{
+    width: auto;
+    height: auto;
+    margin-top: 30px;
+}
+
+#paginatorDiv > div > button {
+    height: 35px;
+    width: 35px;
+    border-radius: 0;
+    background-color: #fff;
+    border: 1px solid #cecece;
+    border-right: 0;
+    color: rgb(59, 59, 59);
+    
+}
+
+#paginatorDiv > div > button:hover {
+    background-color: #e7e7e7;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+}
+
+#paginatorDiv > div > button:first-child{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#paginatorDiv > div > button:last-child{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-right: 1px solid #cecece;
+}
+
+.active{
+    background-color: #1e1e1e !important;
+    color: #fff !important;
+    font-weight: 600;
+}
+
+#paginatorDiv > span{
+    display: block;
+    margin-top: 20px;
 }
 
 /* tr:hover{
