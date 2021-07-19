@@ -22,12 +22,6 @@ def rows_as_dicts(cursor):
     col_names = [i[0] for i in cursor.description]
     return [dict(zip(col_names, row)) for row in cursor]
 
-def check_user(id):
-    conn = db.session.connection()
-    if(rows_as_dicts(conn.execute(""" select id_admin from administratorzy where id_admin = '{}'""".format(id)).cursor)[0]['id_admin'] == id):
-        return True
-    else:
-        return False
 
 @app.route('/')
 def index():
@@ -81,14 +75,6 @@ def login():
         else:
             render_template('login.html', komunikat = komunikat) 
     return render_template('login.html', komunikat = komunikat)
-
-
-#@app.route('/panel')
-#def panel():
-#    if(check_user(session['id_admin']['id_admin']) == True):
-#        return render_template('panel.html')
-#    else:
-#        return redirect('/login')
 
 
 @app.route('/record', methods=['GET', 'POST'])
