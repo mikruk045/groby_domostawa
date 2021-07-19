@@ -94,7 +94,7 @@ def login():
 @app.route('/record', methods=['GET', 'POST'])
 def record():
     conn = db.session.connection()
-    if(check_user(session['id_admin']['id_admin']) == True):
+    if ('id_admin' in session):
         if request.method == "POST":
             imie = request.form['imie']
             nazwisko = request.form['nazwisko']
@@ -119,7 +119,8 @@ def record():
 @app.route('/database')
 def database():
     conn = db.session.connection()
-    if(check_user(session['id_admin']['id_admin']) == True):
+    if ('id_admin' in session):
+        
         data = rows_as_dicts(conn.execute(""" 
         select zm.id, zm.imie, zm.nazwisko, zm.data_urodzenia, zm.data_zgonu, zm.przyczyna, zm.inf_dodat, 
         miej.nazwa, zm.nr_adres, kw.id_kwatera, zm.id_admin, ad.status
@@ -130,7 +131,7 @@ def database():
         inner join administratorzy ad on zm.id_admin = ad.id_admin
         inner join miejscowosci miej on zm.id_miejscowosc = miej.id_miejscowosci
 
-        order by zm.data_zgonu;
+         order by zm.data_zgonu;
     
         """).cursor)
         return render_template('database.html', data = data)
@@ -152,7 +153,7 @@ def database():
 @app.route('/add_mass', methods = ['GET', 'POST'])
 def add_mass():
     conn = db.session.connection()
-    if(check_user(session['id_admin']['id_admin']) == True):
+    if ('id_admin' in session):
         if request.method == 'POST':
             data = request.form['data']
             godzina = request.form['czas']
@@ -170,7 +171,7 @@ def add_mass():
 @app.route('/admin_database')
 def admin_database():
     conn = db.session.connection()
-    if(check_user(session['id_admin']['id_admin']) == True):
+    if ('id_admin' in session):
         data = rows_as_dicts(conn.execute("""
 
         select id_admin, imie, nazwisko, status from administratorzy
@@ -194,7 +195,7 @@ def admin_database():
 @app.route('/mass_database', methods = ['GET', 'POST'])
 def mass_database():
     conn = db.session.connection()
-    if(check_user(session['id_admin']['id_admin']) == True):
+    if ('id_admin' in session):
         data = rows_as_dicts(conn.execute("""
 
         select * from msze
@@ -208,7 +209,7 @@ def mass_database():
 @app.route('/new_admin', methods=['GET', 'POST'])
 def new_admin():
     conn = db.session.connection()
-    if(check_user(session['id_admin']['id_admin']) == True):
+    if ('id_admin' in session):
         if request.method == "POST":
             imie = request.form['imie']
             nazwisko = request.form['nazwisko']
