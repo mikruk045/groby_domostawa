@@ -22,12 +22,6 @@ def rows_as_dicts(cursor):
     col_names = [i[0] for i in cursor.description]
     return [dict(zip(col_names, row)) for row in cursor]
 
-def check_user(id):
-    conn = db.session.connection()
-    if(rows_as_dicts(conn.execute(""" select id_admin from administratorzy where id_admin = '{}'""".format(id)).cursor)[0]['id_admin'] == id):
-        return True
-    else:
-        return False
 
 @app.route('/')
 def index():
@@ -83,14 +77,6 @@ def login():
     return render_template('login.html', komunikat = komunikat)
 
 
-#@app.route('/panel')
-#def panel():
-#    if(check_user(session['id_admin']['id_admin']) == True):
-#        return render_template('panel.html')
-#    else:
-#        return redirect('/login')
-
-
 @app.route('/record', methods=['GET', 'POST'])
 def record():
     conn = db.session.connection()
@@ -104,12 +90,13 @@ def record():
             miejscowosc = request.form['miejscowosc']
             nr_adres = request.form['nr_adresu']
             kwatera = request.form['kwatera']
+            info_dodat = request.form['info_dodat']
         
             id_miejscowosci = rows_as_dicts(conn.execute(""" select id_miejscowosci from miejscowosci where nazwa = '{}' """.format(miejscowosc)).cursor)
             max_id = rows_as_dicts(conn.execute(""" select max(id) from zmarli """).cursor)
             max_id_2 = rows_as_dicts(conn.execute(""" select max(id) from zmarli_kwatery """).cursor)
 
-            conn.execute(""" insert into zmarli (id, nazwisko, imie, data_urodzenia, data_zgonu, przyczyna, id_miejscowosc, nr_adres, id_admin) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}') """.format(str(int(max_id[0]['max'])+1), nazwisko, imie,data_ur, data_zg, przyczyna, id_miejscowosci[0]['id_miejscowosci'], nr_adres, session.get('id_admin')['id_admin']))
+            conn.execute(""" insert into zmarli (id, nazwisko, imie, data_urodzenia, data_zgonu, przyczyna, id_miejscowosc, nr_adres, id_admin, inf_dodat) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}') """.format(str(int(max_id[0]['max'])+1), nazwisko, imie,data_ur, data_zg, przyczyna, id_miejscowosci[0]['id_miejscowosci'], nr_adres, session.get('id_admin')['id_admin'], info_dodat))
             conn.execute(""" insert into zmarli_kwatery (id_kwatera, id, id_zmarly) VALUES ('{}', '{}', '{}') """.format(kwatera, str(int(max_id_2[0]['max'])+1), str(int(max_id[0]['max'])+1)))
         return render_template('record.html')
     else:
@@ -122,7 +109,7 @@ def database():
     if ('id_admin' in session):
         
         data = rows_as_dicts(conn.execute(""" 
-        select zm.id, zm.imie, zm.nazwisko, zm.data_urodzenia, zm.data_zgonu, zm.przyczyna, zm.inf_dodat, 
+        select zm.id, zm.imie, zm.nazwisko, TO_CHAR(zm.data_urodzenia, 'DD.MM.YYYY'), TO_CHAR(zm.data_zgonu, 'DD.MM.YYYY'), zm.przyczyna, zm.inf_dodat, 
         miej.nazwa, zm.nr_adres, kw.id_kwatera, zm.id_admin, ad.status
         from zmarli zm
 
