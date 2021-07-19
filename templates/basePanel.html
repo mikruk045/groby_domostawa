@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/panelStyle.css">
+    <!-- <script src=""></script> -->
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <div class="sidepanel">
+        <div class="panelInfo">
+            <div class="siteName">Parafia pw. Matki Bożej Królowej Polski <br> <div class="siteName2">w Domostawie</div></div>
+        </div>
+        <div class="menu">
+            <a href="/">Strona główna</a>
+            <div class="category">Zmarli na cmentarzu</div>
+            <hr>
+            <a class="activeTab">Lista zmarłych</a>
+            <a href="/record">Dodaj zmarłego</a>
+            <div class="category">Msze w kościele</div>
+            <hr>
+            <a href="/mass_database">Przeglądaj msze</a>
+            <a href="/add_mass">Dodaj mszę</a>
+            <div class="category">Administratorzy</div>
+            <hr>
+            <a href="/new_admin">Dodaj administratora</a>
+            <a href="/admin_database">Przeglądaj administratorów</a>
+            
+        </div>
+    </div>
+    <div class="panelContent">
+        {% block panelContent %}{% endblock %}
+    </div>
+</body>
+</html>
