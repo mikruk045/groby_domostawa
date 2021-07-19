@@ -38,7 +38,7 @@ def cmentarz():
     conn = db.session.connection()
     kwatery = rows_as_dicts(conn.execute(""" select * from kwatery """).cursor)
     zmarli = rows_as_dicts(conn.execute(""" 
-    select zm.imie, zm.nazwisko, TO_CHAR(zm.data_urodzenia, 'DD.MM.YYYY'), TO_CHAR(zm.data_zgonu, 'DD.MM.YYYY'), 
+    select zm.imie, zm.nazwisko, TO_CHAR(zm.data_urodzenia, 'DD.MM.YYYY') as data_urodzenia, TO_CHAR(zm.data_zgonu, 'DD.MM.YYYY') as data_zgonu, 
     miej.nazwa, kw.id_kwatera
     from zmarli zm
 
@@ -109,7 +109,7 @@ def database():
     if ('id_admin' in session):
         
         data = rows_as_dicts(conn.execute(""" 
-        select zm.id, zm.imie, zm.nazwisko, TO_CHAR(zm.data_urodzenia, 'DD.MM.YYYY'), TO_CHAR(zm.data_zgonu, 'DD.MM.YYYY'), zm.przyczyna, zm.inf_dodat, 
+        select zm.id, zm.imie, zm.nazwisko, TO_CHAR(zm.data_urodzenia, 'DD.MM.YYYY') as data_urodzenia, TO_CHAR(zm.data_zgonu, 'DD.MM.YYYY') as data_zgonu, zm.przyczyna, zm.inf_dodat, 
         miej.nazwa, zm.nr_adres, kw.id_kwatera, zm.id_admin, ad.status
         from zmarli zm
 
