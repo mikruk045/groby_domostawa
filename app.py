@@ -75,7 +75,7 @@ def login():
                 haslo = rows_as_dicts(conn.execute(""" select haslo from administratorzy where id_admin = '{}'""".format(username)).cursor)[0]
                 if (check_password_hash(haslo['haslo'], password)):
                     session['id_admin'] = id_admina_get[0]
-                    return redirect(url_for('panel'))
+                    return redirect(url_for('database'))
                 else:
                     render_template('login.html', komunikat = komunikat)
         else:
@@ -83,12 +83,12 @@ def login():
     return render_template('login.html', komunikat = komunikat)
 
 
-@app.route('/panel')
-def panel():
-    if(check_user(session['id_admin']['id_admin']) == True):
-        return render_template('panel.html')
-    else:
-        return redirect('/login')
+#@app.route('/panel')
+#def panel():
+#    if(check_user(session['id_admin']['id_admin']) == True):
+#        return render_template('panel.html')
+#    else:
+#        return redirect('/login')
 
 
 @app.route('/record', methods=['GET', 'POST'])
@@ -121,8 +121,8 @@ def database():
     conn = db.session.connection()
     if(check_user(session['id_admin']['id_admin']) == True):
         data = rows_as_dicts(conn.execute(""" 
-        select zm.id, zm.imie, zm.nazwisko, zm.data_urodzenia, zm.data_zgonu, zm.przyczyna, 
-        miej.nazwa, zm.nr_adres, kw.id_kwatera, ad.id_admin, ad.status
+        select zm.id, zm.imie, zm.nazwisko, zm.data_urodzenia, zm.data_zgonu, zm.przyczyna, zm.inf_dodat, 
+        miej.nazwa, zm.nr_adres, kw.id_kwatera, zm.id_admin, ad.status
         from zmarli zm
 
         inner join zmarli_kwatery kw on zm.id = kw.id_zmarly
@@ -136,6 +136,18 @@ def database():
         return render_template('database.html', data = data)
     else:
         return redirect('/login')
+
+
+@app.route('/database/<imie_nazwisko><rok_zgonu><miejscowosc>', methods=['GET', 'POST'])
+def admin_database_action(action):
+    conn = db.session.connection()
+    if(action == 'edytuj'):
+        #akcja
+        return 0
+    elif(action == 'usuń'):
+        #akcja
+        return 0
+
 
 @app.route('/add_mass', methods = ['GET', 'POST'])
 def add_mass():
@@ -168,6 +180,17 @@ def admin_database():
     else:
         return redirect('/login')
 
+@app.route('/admin_database/<action1><action2>', methods=['GET', 'POST'])
+def admin_database_action(action):
+    conn = db.session.connection()
+    if(action == 'edytuj'):
+        #akcja
+        return 0
+    elif(action == 'usuń'):
+        #akcja
+        return 0
+
+
 @app.route('/mass_database', methods = ['GET', 'POST'])
 def mass_database():
     conn = db.session.connection()
@@ -175,7 +198,6 @@ def mass_database():
         data = rows_as_dicts(conn.execute("""
 
         select * from msze
-
         order by data
 
         """).cursor)
