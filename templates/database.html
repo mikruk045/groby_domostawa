@@ -3,40 +3,43 @@
 {% extends 'basePanel.html' %}
 
 {% block head %}
-
+<link rel="stylesheet" href="/static/js/tabulator-master/dist/css/tabulator.min.css">
+<script src="/static/js/tabulator-master/dist/js/tabulator.min.js"></script>
+<script src="/static/js/panelDatabase.js" defer></script>
 {% endblock %}
 
 {% block panelContent %}
 <div class="subdomainTitle">Baza danych</div>
-<table id="table" style="width:100%">
+<div id="tabelaTabulator"></div>
+<!-- <table id="table" style="width:100%">
   <tr>
-    <th>numer id</th>
-    <th>Imię</th>
     <th>Nazwisko</th>
+    <th>Imię</th>
     <th>Data urodzenia</th>
     <th>Data zgonu</th>
-    <th>Przyczyna zgonu</th>
-    <th>Nazwa miejscowości</th>
-    <th>Numer adresowy</th>
+    <th>Adres</th>
     <th>Kwatera</th>
+    <th>Przyczyna zgonu</th>
     <th>Identyfikator wprowadzającego</th>
-    <th>Status wprowadzającego</th>
+    <th></th>
   </tr>
-  {% for d in data %}
+  {% for d in data[0:50] %}
   <tr>
-    <td>{{d['id']}}</td>
-    <td>{{d['imie']}}</td>
     <td>{{d['nazwisko']}}</td>
+    <td>{{d['imie']}}</td>
     <td>{{d['data_urodzenia']}}</td>
     <td>{{d['data_zgonu']}}</td>
-    <td>{{d['przyczyna']}}</td>
-    <td>{{d['nazwa']}}</td>
-    <td>{{d['nr_adres']}}</td>
+    <td>{{d['nazwa']}} {{d['nr_adres']}}</td>
     <td>{{d['id_kwatera']}}</td>
+    <td class="przyczyna">{{d['przyczyna']}}</td>
     <td>{{d['id_admin']}}</td>
-    <td>{{d['status']}}</td>
-  </tr>
-  {% endfor %}
+    <td class="buttonTd"> 
+      <button class="delete">
+        Usuń
+      </button> 
+    </td>
+  </tr> -->
+  <!-- {% endfor %} -->
   <script>
     let d = '{{ data | tojson }}'
     d = JSON.parse(d);
