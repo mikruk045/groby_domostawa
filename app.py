@@ -138,15 +138,15 @@ def database():
         return redirect('/login')
 
 
-@app.route('/database/<imie_nazwisko><rok_zgonu><miejscowosc>', methods=['GET', 'POST'])
-def admin_database_action(action):
-    conn = db.session.connection()
-    if(action == 'edytuj'):
-        #akcja
-        return 0
-    elif(action == 'usuń'):
-        #akcja
-        return 0
+#@app.route('/database/<imie_nazwisko><rok_zgonu><miejscowosc>', methods=['GET', 'POST'])
+#def admin_database_action(action):
+#    conn = db.session.connection()
+#    if(action == 'edytuj'):
+#        #akcja
+#        return 0
+#    elif(action == 'usuń'):
+#        #akcja
+#        return 0
 
 
 @app.route('/add_mass', methods = ['GET', 'POST'])
@@ -180,15 +180,15 @@ def admin_database():
     else:
         return redirect('/login')
 
-@app.route('/admin_database/<action1><action2>', methods=['GET', 'POST'])
-def admin_database_action(action):
-    conn = db.session.connection()
-    if(action == 'edytuj'):
-        #akcja
-        return 0
-    elif(action == 'usuń'):
-        #akcja
-        return 0
+#@app.route('/admin_database/<action1><action2>', methods=['GET', 'POST'])
+#def admin_database_action(action):
+#    conn = db.session.connection()
+#    if(action == 'edytuj'):
+#        #akcja
+#        return 0
+#    elif(action == 'usuń'):
+#        #akcja
+#        return 0
 
 
 @app.route('/mass_database', methods = ['GET', 'POST'])
