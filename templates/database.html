@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="/static/js/tabulator-master/dist/css/tabulator.min.css">
 <script src="/static/js/tabulator-master/dist/js/tabulator.min.js"></script>
 <script src="/static/js/table-paginator-master/paginator.js"></script>
+<script src="/static/js/panelRecord.js" defer></script>
 <script src="/static/js/panelDatabase.js" defer></script>
 
 {% endblock %}
@@ -19,33 +20,65 @@
 </script>
 <div class="subdomainTitle">Lista zmarłych</div>
 <table id="table" style="width:100%">
-  <tr>
-    <th>Nazwisko</th>
-    <th>Imię</th>
-    <th>Data urodzenia</th>
-    <th>Data zgonu</th>
-    <th>Adres</th>
-    <th>Kwatera</th>
-    <th>Przyczyna zgonu</th>
-    <th>Identyfikator wprowadzającego</th>
-    <th></th>
+  <tr class="columns">
+    <th class="col0">Nazwisko</th>
+    <th class="col1">Imię</th>
+    <th class="col2">Data urodzenia</th>
+    <th class="col3">Data zgonu</th>
+    <th class="col4">Adres</th>
+    <th class="col5">Kwatera</th>
+    <th class="col6">Przyczyna zgonu</th>
+    <th class="col9">Informacje dodatkowe</th>
+    <th class="col7">ID wprowadzającego</th>
+    
+    <th class="col8"></th>
   </tr>
   {% for d in data %}
-  <tr>
-    <td>{{d['nazwisko']}}</td>
-    <td>{{d['imie']}}</td>
-    <td>{{d['data_urodzenia']}}</td>
-    <td>{{d['data_zgonu']}}</td>
-    <td>{{d['nazwa']}} {{d['nr_adres']}}</td>
-    <td>{{d['id_kwatera']}}</td>
-    <td class="przyczyna">{{d['przyczyna']}}</td>
-    <td>{{d['id_admin']}}</td>
-    <td class="buttonTd"> 
+  <tr class="records" id="{{d['id']}}">
+    <td class="col0 nazwisko"><b>{{d['nazwisko']}}</b></td>
+    <td class="col1 imie">{{d['imie']}}</td>
+    {% if d['data_urodzenia'] == '01.01.1800' %}
+    <td class="col2 data_urodzenia noValue">-</td>
+    {% else %}
+    <td class="col2 data_urodzenia">{{d['data_urodzenia']}}</td>
+    {% endif %}
+    {% if d['data_zgonu'] == '01.01.1800' %}
+    <td class="col2 data_urodzenia noValue">-</td>
+    {% else %}
+    <td class="col3 data_zgonu">{{d['data_zgonu']}}</td>
+    {% endif %}
+    {% if d['nr_adres'] == '0' %}
+    <td class="col4 nr_adresu miejscowosc">{{d['nazwa']}}</td>
+    {% else %}
+    <td class="col4 nr_adresu miejscowosc">{{d['nazwa']}} {{d['nr_adres']}}</td>
+    {% endif %}
+    <td class="col5 kwatera">{{d['id_kwatera']}}</td>
+    {% if d['przyczyna'] == 'Brak' %}
+    <td class="col6 przyczyna noValue">{{d['przyczyna']}}</td>
+    {% else %}
+    <td class="col6 przyczyna">{{d['przyczyna']}}</td>
+    {% endif %}
+    {% if d['inf_dodat'] %}
+    <td class="col9 inf_dodat">{{d['inf_dodat']}}</td>
+    {% elif d['inf_dodat'] == '' %}
+    <td class="col9 inf_dodat noValue">-</td>
+    {% else %}
+    <td class="col9 inf_dodat noValue">-</td>
+    {% endif %}
+    <td class="col7">{{d['id_admin']}}</td>
+    
+    <td class="col8 buttonTd"> 
       <button class="delete">
         Usuń
       </button> 
     </td>
   </tr>
+  <!-- <tr>
+    <td class="newcol" colspan='9'>
+      Tu jakies inputy do edycji np.
+      <input class="inputText requiredInput" type="text" id="nazwisko" name="nazwisko" placeholder="Nazwisko zmarłego" value="">
+    </td>
+  </tr> -->
   {% endfor %}
 </table>
   <div id="paginatorDiv"></div>

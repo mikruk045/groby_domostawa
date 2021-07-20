@@ -413,6 +413,18 @@ td {
     /* font-style: italic; */
 }
 
+.editRecord{
+    width: 80%;
+    margin: 0 auto 0 auto;
+
+}
+
+.noValue{
+    font-style: italic;
+    color: rgb(110, 110, 110);
+}
+
+
 @media screen and (max-width:1300px){
     .flexBase{
         flex-direction: column;
@@ -525,6 +537,12 @@ td {
     }
     .flexContainer{
         margin-bottom: 2%;
+    }
+    table{
+        font-size: 0.7rem;
+    }
+    td{
+        font-size: 0.7rem;
     }
 }
 
