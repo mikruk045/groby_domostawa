@@ -109,6 +109,23 @@ function inputValidation(elem, fn){
 }
 
 function addRecordValidate(state){
+    function inputChanges(){
+        for(let i=0; i<regInputs.length; i++){
+            if(regInputs[i].classList.contains('profileInputVALID') === false){
+                registerStatusAll[i] = false;
+            }else{
+                registerStatusAll[i] = true;
+            }
+        };
+        let ev = registerStatusAll.every((item)=>{
+            return item === true
+        });
+        if(ev){
+            buttonRegister.disabled = false;
+        }else{
+            buttonRegister.disabled = true;
+        }
+    }
     let buttonRegister = document.getElementsByClassName('inputSubmit')[0]
 
     let regInputs = document.getElementsByClassName('requiredInput');
@@ -116,23 +133,16 @@ function addRecordValidate(state){
     let registerStatusAll = [false, false, false, false];
     function checkRegisterInputs(){
         for(let input of regInputs){
-            input.addEventListener('input', ()=>{
-                for(let i=0; i<regInputs.length; i++){
-                    if(regInputs[i].classList.contains('profileInputVALID') === false){
-                        registerStatusAll[i] = false;
-                    }else{
-                        registerStatusAll[i] = true;
-                    }
-                };
-                let ev = registerStatusAll.every((item)=>{
-                    return item === true
+            // console.log(input);
+            if(input.tagName === 'INPUT'){
+                input.addEventListener('input', ()=>{
+                    inputChanges();
                 });
-                if(ev){
-                    buttonRegister.disabled = false;
-                }else{
-                    buttonRegister.disabled = true;
-                }
-            })
+            }else{
+                input.addEventListener('change', ()=>{
+                    inputChanges();
+                });
+            }
         }
     }
 
