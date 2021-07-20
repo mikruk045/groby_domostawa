@@ -1,52 +1,121 @@
-{% extends 'base.html' %}
+{% extends 'basePanel.html' %}
 
 {% block head %}
-
+<script src="/static/js/panelRecord.js" defer></script>
 {% endblock %}
 
-{% block body %}
-<h1>Dodaj nowy rekord</h1>
+{% block panelContent %}
+<script>
+    document.getElementById('dodajzmarlego').removeAttribute('href');
+    document.getElementById('dodajzmarlego').classList.add('activeTab');
+</script>
+<div class="subdomainTitle">Dodaj zmarłego</div>
 
-<form action="" method="post" id="form">
+<div class="flexRows flexBase">
+    <div class="recordContainer">
+        <form action="" method="post" id="form">
+    
+            <div class="flexRows">
+                <div class="flexContainer">
+                    <label class="requiredField" for="imie">Imię</label>
+                    <input class="inputText requiredInput" type="text" id="imie" name="imie" placeholder="Imię zmarłego" value="">
+                    <div class="messageInput"><span>Imię może zawierać tylko litery</span></div>
+                </div>
+                <div class="flexContainer">
+                    <label class="requiredField" for="nazwisko">Nazwisko</label>
+                    <input class="inputText requiredInput" type="text" id="nazwisko" name="nazwisko" placeholder="Nazwisko zmarłego" value="">
+                    <div class="messageInput"><span>Nazwisko może zawierać tylko litery</span></div>
+                </div>
+            </div>
+            <div class="flexRows">
+                <div class="flexContainer">
+                    <label for="data_urodzenia">Data urodzenia</label>
+                    <input class="inputText" type="date" id="data_urodzenia" name="data_urodzenia" value="">
+                    <div class="messageInput"><span>Data urodzenia musi być większa od 1800 i nie większa od roku obecnego</span></div>
+                </div>
+                <div class="flexContainer">
+                    <label for="data_zgonu">Data zgonu</label>
+                    <input class="inputText" type="date" id="data_zgonu" name="data_zgonu" value="">
+                    <div class="messageInput"><span>Data śmierci musi być większa od 1800 i nie większa od roku obecnego</span></div>
+                </div>
+            </div>
+            <div class="flexRows">
+                <div class="flexContainer">
+                    <label for="przyczyna">Przyczyna zgonu</label>
+                    <input class="inputText" type="text" id="przyczyna" name="przyczyna" placeholder="Przyczyna śmierci zmarłego" value="">
+                    <div class="messageInput"><span>Treść przekracza limit 500 znaków</span></div>
+                </div>
+            </div>
+    
+            <!-- <div class="group"> -->
+                <div class="flexRows">
+                    <div class="flexContainer">
+                        <label class="requiredField" for="miejscowosc">Miejscowość</label>
+                        <select class="inputText requiredInput" id="miejscowosc" name="miejscowosc">
+                            <option class="optionDefault" value="" disabled selected>Wybierz miejscowość</option>
+                            <option value="Domostawa">Domostawa</option>
+                            <option value="Katy">Katy</option>
+                            <option value="Kutyły">Kutyły</option>
+                            <option value="Madeje">Madeje</option>
+                            <option value="Ruda">Ruda</option>
+                            <option value="Szwedy">Szwedy</option>
+                            <option value="Zdziary">Zdziary</option>
+                            <option value="Inna">Inna</option>
+                        </select>
+                        <div class="messageInput"><span>Błędna miejscowość</span></div>
+                    </div>
+        
+                    <div class="flexContainer">
+                        <label for="nr_adresu">Numer domu</label>
+                        <input class="inputText" type="text" id="nr_adresu" placeholder="Numer domu/mieszkania zmarłego" name="nr_adresu" value="">
+                        <div class="messageInput"><span>Treść przekracza limit 500 znaków</span></div>
+                    </div>
+                    <div class="flexContainer">
+                        <label for="kwatera" class="requiredField">Kwatera</label>
+                        <input class="inputText requiredInput" type="text" id="kwatera" name="kwatera" placeholder="Oznaczenie kwatery, na której leży zmarły" value="">
+                        <div class="messageInput"><span>Treść przekracza limit 500 znaków</span></div>
+                    </div>
+                </div>
+            <!-- </div> -->
+    
+            <div class="flexRows">
+                <div class="flexContainer">
+                    <label for="info_dodat">Informacje dodatkowe</label>
+                    <input class="inputText" type="text" id="info_dodat" name="info_dodat" placeholder="Dane dodatkowe, które wychodzą poza treść formularza (np. o miejscowości w przypadku wybrania pozycji 'inna')" value="">
+                    <div class="messageInput"><span>Treść przekracza limit 500 znaków</span></div>
+                </div>
+            </div>
+    
+            <br></br>
+            <button class="inputSubmit" disabled type="submit">Dodaj</button>
+        
+        </form>
+    </div>
+    <div class="inputValidation">
+        <div class="inputValidationContent">
+            <div class="titleValidate">Zasady dodawania zmarłego do spisu</div>
+            <div class="valSection">
+                Poniżej znajduje się lista informacji wymaganych, oznaczonych czerwoną gwiazdką (<span style="color: #ff262a;">✷</span>). Aby odblokować przycisk dodania rekordu, należy wypełnić je wszystkie, co zostanie zasygnalizowane zmianą stanu poniższej listy:
+                <ul class="validateList">
+                    <li id="imieLI" class="INVALIDlist">Imię</li>
+                    <li id="nazwiskoLI" class="INVALIDlist">Nazwisko</li>
+                    <li id="mscLI" class="INVALIDlist">Miejscowość zmarłego</li>
+                    <li id="kwaLI" class="INVALIDlist">Kwatera</li>
+                </ul>
+            </div>
+            <div class="valSection">
+                Pola z treścią są reprezentowane za pomocą trzech kolorów obramówki. Każdy z nich niesie inną informację. <br>
+                <br>
+                <input type="text" class="inputText" disabled style="width: 110px; height: 30px;" value="Szara"> - pole nie ma wartości i dopóki nie jest ono wymagane, żadna informacja nie zostanie przekazana.
+                <br><br>
+                <input type="text" class="inputText profileInputVALID"  disabled style="width: 110px; height: 30px;" value="Zielona"> - pole zostało poprawnie wypełnione i podana informacja zostanie wysłana do bazy.
+                <br><br>
+                <input type="text" class="inputText profileInputINVALID"  disabled style="width: 110px; height: 30px;" value="Czerwona"> - pole zostało niepoprawnie wprowadzone. Należy zwrócić uwagę na treść komunikatu, który pojawi się wtedy pod polem.
+            </div>
+        </div>
+    </div>
+</div>
 
-    <label for="imie">Imię zmarłego</label>
-    <input type="text" id="imie" name="imie" value="">
-    <br></br>
-    <label for="nazwisko">Nazwisko zmarłego</label>
-    <input type="text" id="nazwisko" name="nazwisko" value="">
-    <br></br>
-    <label for="data_urodzenia">Data urodzenia</label>
-    <input type="date" id="data_urodzenia" name="data_urodzenia" value="">
-    <br></br>
-    <label for="data_zgonu">Data zgonu</label>
-    <input type="date" id="data_zgonu" name="data_zgonu" value="">
-    <br></br>
-    <label for="przyczyna">Przyczyna zgonu</label>
-    <input type="text" id="przyczyna" name="przyczyna" value="">
-    <br></br>
-    <label for="miejscowosc">Nazwa miejscowości zamieszkania zmarłego</label>
-    <select id="miejscowosc" name="miejscowosc">
-        <option value="Domostawa">Domostawa</option>
-        <option value="Katy">Katy</option>
-        <option value="Kutyły">Kutyły</option>
-        <option value="Madeje">Madeje</option>
-        <option value="Ruda">Ruda</option>
-        <option value="Szwedy">Szwedy</option>
-        <option value="Zdziary">Zdziary</option>
-        <option value="Inna">Inna</option>
-    </select>
-    <br></br>
-    <label for="nr_adresu">Numer domu zmarłego</label>
-    <input type="text" id="nr_adresu" name="nr_adresu" value="">
-    <br></br>
-    <label for="kwatera">Kwatera gdzie pochowany jest zmarły</label>
-    <input type="text" id="kwatera" name="kwatera" value="">
-    <br></br>
-    <label for="info_dodat">Informacje dodatkowe</label>
-    <input type="text" id="info_dodat" name="info_dodat" value="">
-    <br></br>
-    <button type="submit">dodaj</button>
 
-</form>
 
 {% endblock %}

@@ -1,5 +1,3 @@
-
-
 {% extends 'basePanel.html' %}
 
 {% block head %}
@@ -11,8 +9,11 @@
 {% endblock %}
 
 {% block panelContent %}
+<script>
+    document.getElementById('listazmarlych').removeAttribute('href');
+    document.getElementById('listazmarlych').classList.add('activeTab');
+</script>
 <div class="subdomainTitle">Lista zmarłych</div>
-<div id="tabelaTabulator"></div>
 <table id="table" style="width:100%">
   <tr>
     <th>Nazwisko</th>

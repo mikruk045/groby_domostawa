@@ -41,7 +41,8 @@ body{
 }
 
 .panelContent{
-    padding: 30px 50px;
+    padding: 3rem 8%;
+    /* padding: 30px 50px; */
     overflow-y: auto;
     background-color: rgb(249, 249, 249);
 }
@@ -120,7 +121,7 @@ th{
 td {
     font-size: 1rem;
     text-align: center;
-    border-bottom: 1px solid rgb(206, 206, 206, 0.5);
+    border-bottom: 1px solid rgb(206, 206, 206, 0.6);
 }
 
 
@@ -209,6 +210,196 @@ td {
     display: block;
     margin-top: 20px;
 }
+
+.recordContainer{
+    /* padding: 3rem 8%; */
+    /* background-color: #fff; */
+    /* border: 1px solid #cecece; */
+    border-radius: 5px;
+    width: 100%;
+}
+
+
+.inputText{
+    width: 100%;
+    height: 40px;
+    border: 1px solid #cecece;
+    border-radius: 5px;
+    transition: .1s linear;
+    padding: 0 1.5rem;
+    background-color: #fff;
+}
+
+.inputText:focus{
+    outline: 0;
+    border: 1px solid #727272;
+    box-shadow: 0 0 0 3pt  rgba(172, 172, 172, 0.3);
+}
+
+.inputSubmit{
+    width: 150px;
+    cursor: pointer;
+    /* margin-top: 3%; */
+    display: block;
+    height: 45px;
+    font-size: 0.85rem;
+    padding: 0.8rem 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    border: 1px solid  #1f1f1f;
+    border-radius: 3px;
+    background-color: #1f1f1f;
+    transition: .2s linear;
+}
+
+.inputSubmit:hover{
+    background-color: #000000;
+}
+
+.inputSubmit:disabled{
+    cursor:default;
+    border: 1px solid #6e6e6e;
+    color: #6e6e6e;
+    background-color: #fff;
+}
+
+.flexRows{
+    display: flex;
+    width: 100%;
+    gap: 5%;
+    flex-direction: row;
+    margin-bottom: 2%;
+}
+
+.flexContainer{
+    width: 100%;
+    /* flex-shrink: 0; */
+    flex-grow: 1;
+}
+
+.flexContainer > label {
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 10px !important;
+}
+
+.group{
+    border: 1px solid #cecece;
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+.requiredField::after{
+    content: ' ✷';
+    color: #ff262a;
+    transform: scale(150%);
+
+}
+
+#miejscowosc{
+    color: #000;
+}
+
+.flexBase{
+    flex-grow: 1;
+}
+
+.inputValidationContent{
+    font-size: 00.85rem;
+}
+
+.titleValidate{
+    font-weight: 600;
+    /* font-style: italic; */
+    margin-bottom: 15px;
+    font-size: 0.8rem;
+}
+
+.inputValidation{
+    width: 50%;
+    border-left: 1px solid #cecece;
+    /* background-color: #fff;
+    border: 1px solid #cecece; */
+    border-radius: 5px;
+    padding: 2rem 3rem;
+}
+
+.validateList{
+    padding-left: 25px;
+    font-style: italic;
+}
+
+
+
+.INVALIDlist::marker{
+    content: '✖  ';
+}
+
+.INVALIDlist{
+    color: #f06b6b;
+    transition: .2s linear;
+}
+
+.VALIDlist::marker{
+    content: '✔  ';
+}
+
+.VALIDlist{
+    transition: .2s linear;
+    color: #008000;
+}
+
+.profileInputVALID{
+    border: 1px solid #008000;
+}
+
+.profileInputINVALID{
+    border: 1px solid rgb(255, 0, 0);
+}
+
+.profileInputVALID:focus{
+    outline: 0;
+    border: 1px solid #008000;
+    box-shadow: 0 0 0 3pt  rgb(0, 128, 0, 0.3);
+}
+
+.profileInputINVALID:focus{
+    outline: 0;
+    border: 1px solid rgb(255, 0, 0);
+    box-shadow: 0 0 0 3pt  rgba(255, 0, 0, 0.3);
+}
+
+.messageInput{
+    display: none;
+    /* margin: 10% 0; */
+    font-size: 0.8rem;
+    /* width: 80%; */
+    text-align: center;
+    padding: 1em 10%;
+    border-radius: 5px;
+    margin-top: 20px;
+    border: 1px solid #f5c2c7;
+    background-color: #f8d7da;
+    color: #932020;
+}
+
+@media screen and (max-width:1300px){
+    .flexBase{
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    .inputValidation{
+        border-left: 0;
+        width: 100%;
+        border-top: 1px solid #cecece;
+    }
+}
+
+/* @media screen and (max-width:830px){
+
+} */
+
 
 /* tr:hover{
     background-color: #f0f0f0;
