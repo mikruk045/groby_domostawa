@@ -194,3 +194,5 @@ infodod.addEventListener('input', ()=>{inputValidation(infodod, validateTextfiel
 dataurodzenia.addEventListener('input', ()=>{inputValidation(dataurodzenia, validateDate)});
 datasmierci.addEventListener('input', ()=>{inputValidation(datasmierci, validateDate)});
 // passwordForm.addEventListener('input', ()=>{inputValidation(passwordForm, validatePassword), checkRegisterInputs()});
+
+

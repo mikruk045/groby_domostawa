@@ -9,10 +9,26 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/panelStyle.css">
+    <script src="/static/js/panelScript.js" defer></script>
     <!-- <script src=""></script> -->
     {% block head %}{% endblock %}
 </head>
 <body>
+    <div class="mobileNav">
+        <div class="mobileTitle">
+            Parafia pw. Matki Bożej Królowej Polski <br> <div class="siteName2">w Domostawie</div>
+        </div>
+        <div class="mobileMenu">
+            <div class="mobileIcon">
+                <div class="mobileSVG">
+                    <svg version="1.1" id="Warstwa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" 	 viewBox="0 0 1510 1038" style="enable-background:new 0 0 1510 1038;" xml:space="preserve"> <g> 	<path d="M1404.5,209h-1300C46.8,209,0,162.2,0,104.5v0C0,46.8,46.8,0,104.5,0h1300c57.7,0,104.5,46.8,104.5,104.5v0 		C1509,162.2,1462.2,209,1404.5,209z"/> </g> <g> 	<path d="M1404.5,627h-1300C46.8,627,0,580.2,0,522.5v0C0,464.8,46.8,418,104.5,418h1300c57.7,0,104.5,46.8,104.5,104.5v0 		C1509,580.2,1462.2,627,1404.5,627z"/> </g> <g> 	<path d="M1405.5,1038h-1300C47.8,1038,1,991.2,1,933.5v0C1,875.8,47.8,829,105.5,829h1300c57.7,0,104.5,46.8,104.5,104.5v0 		C1510,991.2,1463.2,1038,1405.5,1038z"/> </g> </svg>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+
     <div class="sidepanel">
         <div class="panelInfo">
             <div class="siteName">Parafia pw. Matki Bożej Królowej Polski <br> <div class="siteName2">w Domostawie</div></div>
@@ -35,6 +51,9 @@
             
         </div>
     </div>
+    <!-- <div class="content">
+        <p>Lorem ipsum...</p>
+      </div> -->
     <div class="panelContent">
         {% block panelContent %}{% endblock %}
     </div>

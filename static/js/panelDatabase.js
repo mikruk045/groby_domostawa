@@ -41,9 +41,10 @@ let paginatorDiv = document.getElementById("paginatorDiv");
 
 let paginatorButtons = paginatorDiv.getElementsByTagName('button');
 
-// window.addEventListener('load',()=>{
-//     alert('juz');
-// })
+window.addEventListener('load',()=>{
+    document.getElementsByClassName('loading')[0].style.display = 'none';
+    document.getElementsByClassName('tablecontent')[0].style.display = 'block';
+})
 
 paginator({
     table: tabela,
@@ -58,8 +59,8 @@ for(let i=0; i< rows.length; i++){
             rows[i].lastElementChild.children[0].style.opacity = 'initial';
         });
         rows[i].addEventListener('mouseout', ()=>{
-            rows[i].style.backgroundColor = 'initial';
-            rows[i].lastElementChild.children[0].style.opacity = '0';
+            rows[i].removeAttribute('style');
+            rows[i].lastElementChild.children[0].removeAttribute('style');
         })
     }
 

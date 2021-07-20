@@ -9,7 +9,11 @@
 {% endblock %}
 
 {% block panelContent %}
-<script>
+<div class="loading">
+  <div class="loadingIcon">Ładowanie...</div>
+</div>
+<div class="tablecontent">
+  <script>
     document.getElementById('listazmarlych').removeAttribute('href');
     document.getElementById('listazmarlych').classList.add('activeTab');
 </script>
@@ -49,4 +53,6 @@
     let d = '{{ data | tojson }}'
     d = JSON.parse(d);
   </script>
+</div>
+
 {% endblock %}
