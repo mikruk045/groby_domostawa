@@ -1,0 +1,17 @@
+.flexTableForm{
+    gap: 150px;
+}
+
+.addMassForm{
+    width: 60%;
+}
+
+@media screen and (max-width:1500px){
+    .flexTableForm{
+        gap: 50px;
+        flex-direction: column-reverse;
+    }
+    .addMassForm{
+        width: 100%;
+    }
+}

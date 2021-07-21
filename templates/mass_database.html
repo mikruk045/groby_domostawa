@@ -1,24 +1,82 @@
-{% extends 'base.html' %}
+{% extends 'basePanel.html' %}
 
 {% block head %}
-
+<link rel="stylesheet" href="/static/panelMassStyle.css">
+<script src="/static/js/panelTableMain.js" defer></script>
+<script src="/static/js/panelRecord.js" defer></script>
+<script src="/static/js/panelMassRecord.js" defer></script>
+<script src="/static/js/panelMassDatabase.js" defer></script>
 {% endblock %}
 
-{% block body %}
-<h1>Baza danych</h1>
-<table style="width:100%">
-  <tr>
-    <th>data</th>
-    <th>zamawiający</th>
-    <th>odprawiający</th>
-    <th>złożona ofiara</th>
-  </tr>
-  {% for d in data %}
-  <tr>
-    <td>{{d['data']}}</td>
-    <td>{{d['zamawiajacy']}}</td>
-    <td>{{d['odprawia']}}</td>
-    <td>{{d['ofiara']}}</td>
-  </tr>
-  {% endfor %}
+{% block panelContent %}
+<script>
+  document.getElementById('przegladajmsze').removeAttribute('href');
+  document.getElementById('przegladajmsze').classList.add('activeTab');
+</script>
+<div class="subdomainTitle">Dodaj i przeglądaj intencje mszalne</div>
+<div class="flexRows flexTableForm">
+  <div class="recordContainer addMassForm">
+    <form action="" method="post" id="form">
+
+      <div class="flexRows">
+        <div class="flexContainer">
+          <label class="requiredField" for="data">data mszy</label>
+          <input class="inputText requiredInput" type="date" id="data" name="data" value="">
+          <div class="messageInput"><span>Data mszy niepoprawna</span></div>
+        </div>
+        <div class="flexContainer">
+          <label class="requiredField" for="czas">godzina mszy</label>
+          <input class="inputText requiredInput" type="time" id="czas" name="czas" value="">
+          <div class="messageInput"><span>Godzina mszy niepoprawna</span></div>
+        </div>
+      </div>
+      <div class="flexRows">
+        <div class="flexContainer">
+          <label class="requiredField" for="zamawiajacy">Osoba/y zamawiająca</label>
+          <input class="inputText requiredInput" type="text" id="zamawiajacy" name="zamawiajacy" value="">
+          <div class="messageInput"><span>Przekroczono limit 500 znaków</span></div>
+        </div>
+      </div>
+      <div class="flexRows">
+        <div class="flexContainer">
+          <label class="requiredField" for="odprawia">Odprawia</label>
+          <input class="inputText requiredInput" type="text" id="odprawia" name="odprawia" value="">
+          <div class="messageInput"><span>Przekroczono limit 500 znaków</span></div>
+        </div>
+        <!-- <div class="flexContainer">
+          <label class="requiredField" for="ofiara">Ofiara</label>
+          <input class="inputText requiredInput" type="number" id="ofiara" name="ofiara" value="">
+          <div class="messageInput"><span>Imię może zawierać tylko litery</span></div>
+        </div> -->
+      </div>
+      <br><br>
+      <button class="inputSubmit" disabled type="submit">Dodaj mszę</button>
+  
+  </form>
+  </div>
+
+  <table id="table" style="width:100%">
+      <tr class="columns">
+        <th class="col0">Data</th>
+        <th class="col1">Zamawiający</th>
+        <th class="col2">Odprawiający</th>
+        <!-- <th class="col3">Ofiara</th> -->
+        <th class="col4"></th>
+      </tr>
+      <!-- {{d['zamawiajacy']}} -->
+      {% for d in data %}
+      <tr class="records">
+        <td class="col0 data">{{d['data']}}</td>
+        <td class="col1 zamawiajacy">Ks. Mateusz Migrocki</td>
+        <td class="col2 odprawia">{{d['odprawia']}}</td>
+        <!-- <td class="col3 ofiara">{{d['ofiara']}}</td> -->
+        <td class="col4 buttonTd"> 
+          <button class="delete">
+            Usuń
+          </button> 
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+</div>
 {% endblock %}

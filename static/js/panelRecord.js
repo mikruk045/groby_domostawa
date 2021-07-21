@@ -42,7 +42,6 @@ function validatePlace(place) {
 
 function validateDate(date) {
     let year = new Date().getFullYear();
-    // (Number(date.split('-')[0]) < year - 100 || Number(date.split('-')[0]) >= year-10)
     if(Number(date.split('-')[0]) < 1800 || Number(date.split('-')[0]) > year){
         return false
     }else{

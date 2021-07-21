@@ -1,31 +1,57 @@
-{% extends 'base.html' %}
+{% extends 'basePanel.html' %}
 
 {% block head %}
 
 {% endblock %}
 
-{% block body %}
+{% block panelContent %}
 <h1>dodaj mszę </h1>
 
-<form action="" method="post" id="form">
+<div class="flexRows">
+    <form action="" method="post" id="form">
 
-    <label for="data">data mszy</label>
-    <input type="date" id="data" name="data" value="">
-    <br></br>
-    <label for="czas">godzina mszy</label>
-    <input type="time" id="czas" name="czas" value="">
-    <br></br>
-    <label for="zamawiajacy">Osoba/y zamawiająca</label>
-    <input type="text" id="zamawiajacy" name="zamawiajacy" value="">
-    <br></br>
-    <label for="odprawia">odprawia</label>
-    <input type="text" id="odprawia" name="odprawia" value="">
-    <br></br>
-    <label for="ofiara">ofiara</label>
-    <input type="text" id="ofiara" name="ofiara" value="">
-    <br></br>
-    <button type="submit">dodaj</button>
+        <label for="data">data mszy</label>
+        <input type="date" id="data" name="data" value="">
+        <br></br>
+        <label for="czas">godzina mszy</label>
+        <input type="time" id="czas" name="czas" value="">
+        <br></br>
+        <label for="zamawiajacy">Osoba/y zamawiająca</label>
+        <input type="text" id="zamawiajacy" name="zamawiajacy" value="">
+        <br></br>
+        <label for="odprawia">odprawia</label>
+        <input type="text" id="odprawia" name="odprawia" value="">
+        <br></br>
+        <label for="ofiara">ofiara</label>
+        <input type="text" id="ofiara" name="ofiara" value="">
+        <br></br>
+        <button type="submit">dodaj</button>
+    
+    </form>
+    <table id="table" style="width:100%">
+        <tr class="columns">
+          <th class="col0">Data</th>
+          <th class="col1">Zamawiający</th>
+          <th class="col2">Odprawiający</th>
+          <th class="col3">Ofiara</th>
+          <th class="col4"></th>
+        </tr>
+        {% for d in data %}
+        <tr>
+          <td class="col0 data">{{d['data']}}</td>
+          <td class="col1 zamawiajacy">{{d['zamawiajacy']}}</td>
+          <td class="col2 odprawia">{{d['odprawia']}}</td>
+          <td class="col3 ofiara">{{d['ofiara']}}</td>
+          <td class="col4 buttonTd"> 
+            <button class="delete">
+              Usuń
+            </button> 
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+</div>
 
-</form>
+
 
 {% endblock %}

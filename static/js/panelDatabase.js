@@ -83,7 +83,6 @@ let paginatorButtons = paginatorDiv.getElementsByTagName('button');
 
 window.addEventListener('load',()=>{
     document.getElementsByClassName('loading')[0].remove();
-    // document.getElementsByClassName('loading')[0].style.display = 'none';
     document.getElementsByClassName('tablecontent')[0].style.display = 'block';
 })
 
@@ -124,10 +123,13 @@ function createExpand(record){
     editButton.classList.add('inputSubmit');
     editButton.classList.add('editRecord');
 
+    // editButton.style.textAlign = 'center';
+
 
     nextTr = document.createElement('tr');
     let nextTd = document.createElement('td');
     nextTd.colSpan = '100';
+    nextTd.style.padding = '2rem 4rem'
     if(expandContent.innerHTML !== ''){
         nextTd.appendChild(expandContent);
     }   
@@ -136,7 +138,7 @@ function createExpand(record){
     recordContainer.classList.add('recordContainer');
     recordContainer.innerHTML = `        <form action="" method="post" id="form">
     
-    <div class="flexRows">
+    <div class="flexRows flexEditDatabase">
         <div class="flexContainer">
             <label class="requiredField" for="imie">Imię</label>
             <input class="inputText requiredInput" type="text" id="imie" name="imie" placeholder="Imię zmarłego" value="">
@@ -148,7 +150,7 @@ function createExpand(record){
             <div class="messageInput"><span>Nazwisko może zawierać tylko litery</span></div>
         </div>
     </div>
-    <div class="flexRows">
+    <div class="flexRows flexEditDatabase">
         <div class="flexContainer">
             <label for="data_urodzenia">Data urodzenia</label>
             <input class="inputText" type="date" id="data_urodzenia" name="data_urodzenia" value="">
@@ -160,7 +162,7 @@ function createExpand(record){
             <div class="messageInput"><span>Data śmierci musi być większa od 1800 i nie większa od roku obecnego</span></div>
         </div>
     </div>
-    <div class="flexRows">
+    <div class="flexRows flexEditDatabase">
         <div class="flexContainer">
             <label for="przyczyna">Przyczyna zgonu</label>
             <input class="inputText" type="text" id="przyczyna" name="przyczyna" placeholder="Przyczyna śmierci zmarłego" value="">
@@ -169,7 +171,7 @@ function createExpand(record){
     </div>
 
     <!-- <div class="group"> -->
-        <div class="flexRows">
+        <div class="flexRows flexEditDatabase">
             <div class="flexContainer">
                 <label class="requiredField" for="miejscowosc">Miejscowość</label>
                 <select class="inputText requiredInput" id="miejscowosc" name="miejscowosc">
@@ -199,7 +201,7 @@ function createExpand(record){
         </div>
     <!-- </div> -->
 
-    <div class="flexRows">
+    <div class="flexRows flexEditDatabase">
         <div class="flexContainer">
             <label for="info_dodat">Informacje dodatkowe</label>
             <input class="inputText" type="text" id="info_dodat" name="info_dodat" placeholder="Dane dodatkowe, które wychodzą poza treść formularza (np. o miejscowości w przypadku wybrania pozycji 'inna')" value="">
@@ -213,10 +215,10 @@ function createExpand(record){
 </form>`
     
     nextTd.appendChild(editButton);
-    // nextTd.appendChild(recordContainer)
     nextTr.appendChild(nextTd);
     record.parentNode.insertBefore(nextTr, record.nextSibling);
-    editButton.style.textAlign = 'left';
+    editButton.style.textAlign = 'center';
+    recordContainer.style.textAlign = 'left'
     editButton.addEventListener('click',()=>{
         function triggerSelect(elem) {
             var event = new Event('change', {
@@ -272,46 +274,7 @@ function createExpand(record){
         
     })
 }
-let rowExpanded = false;
-let elemSelected;
-let elemDOM;
-for(let i=0; i< rows.length; i++){
-    if(i !== -1){
-        
-        rows[i].addEventListener('click',()=>{
-            // alert('tak')
-            if(elemSelected === rows[i].id){
-                if(nextTr !== undefined){
-                    nextTr.remove();
-                }
-                elemSelected = undefined;
-            }else{
-                createExpand(rows[i]);
-                elemSelected = rows[i].id;
-                elemDOM = rows[i];
-            }
 
-
-            // if(rowExpanded){
-            //     if(nextTr !== undefined){
-            //         nextTr.remove();
-            //     };
-            // }else{
-            //     createExpand(rows[i]);
-            // }
-            
-        })
-        rows[i].addEventListener('mouseover', ()=>{
-            rows[i].style.backgroundColor = '#f0f0f0';
-            rows[i].lastElementChild.children[0].style.opacity = 'initial';
-        });
-        rows[i].addEventListener('mouseout', ()=>{
-            rows[i].removeAttribute('style');
-            rows[i].lastElementChild.children[0].removeAttribute('style');
-        })
-    }
-
-}
 
 
 for(let button of paginatorButtons){
