@@ -126,15 +126,34 @@ def database():
         return redirect('/login')
 
 
-#@app.route('/database/<imie_nazwisko><rok_zgonu><miejscowosc>', methods=['GET', 'POST'])
-#def admin_database_action(action):
-#    conn = db.session.connection()
-#    if(action == 'edytuj'):
-#        #akcja
-#        return 0
-#    elif(action == 'usuń'):
-#        #akcja
-#        return 0
+@app.route('/database/<id>', methods=['GET', 'POST'])
+def database_delete(id):
+    conn = db.session.connection()
+    conn.execute(""" delete from zmarli where id = '{}' """.format(id))
+    conn.execute(""" delete form zmarli_kwatery where id_zmarly = '{}' """.format(id))
+
+
+@app.route('/database/', methods=['GET', 'POST'])
+def database_edit():
+    conn = db.session.connection()
+    if request.method == 'POST':
+        if ('id_admin' in session):
+            imie = request.form['imie']
+            nazwisko = request.form['nazwisko']
+            data_ur = request.form['data_urodzenia']
+            data_zg = request.form['data_zgonu']
+            przyczyna = request.form['przyczyna']
+            miejscowosc = request.form['miejscowosc']
+            nr_adres = request.form['nr_adresu']
+            kwatera = request.form['kwatera']
+            info_dodat = request.form['info_dodat']
+            id_miejscowosci = rows_as_dicts(conn.execute(""" select id_miejscowosci from miejscowosci where nazwa = '{}' """.format(miejscowosc)).cursor)
+            id_obiektu = request.form['id']
+            conn.execute(""" update zmarli set nazwisko = '{}', imie = '{}', data_urodzenia = '{}', data_zgonu = '{}', przyczyna = '{}', id_miejscowosc = '{}', nr_adres = '{}', id_admin = '{}', inf_dodat = '{}' where id = '{}' """.format(nazwisko, imie, data_ur, data_zg, przyczyna, id_miejscowosci, nr_adres, session.get('id_admin')['id_admin'], info_dodat, id_obiektu))
+            conn.execute(""" update zmarli_kwatery id_kwatera = '{}' where id_zmarly = '{}' """.format(kwatera, id_obiektu))
+            return render_template('database.html')
+    else:
+        return render_template('database.html')
 
 
 @app.route('/add_mass', methods = ['GET', 'POST'])
@@ -164,6 +183,14 @@ def admin_database():
         select id_admin, imie, nazwisko, status from administratorzy
 
         """).cursor)
+        if request.method == "POST":
+            imie = request.form['imie']
+            nazwisko = request.form['nazwisko']
+            id_admina = request.form['id_admina']
+            status = request.form['status']
+            haslo = request.form['password']
+            hash_haslo = generate_password_hash(haslo)
+            conn.execute(""" insert into administratorzy (id_admin, nazwisko, imie, status, haslo) VALUES ('{}', '{}', '{}', '{}', '{}')""".format(id_admina, nazwisko, imie, status, hash_haslo))
         return render_template('admin_database.html', data = data)
     else:
         return redirect('/login')
@@ -189,25 +216,34 @@ def mass_database():
         order by data
 
         """).cursor)
+        if request.method == 'POST':
+            data = request.form['data']
+            godzina = request.form['czas']
+            zamawiajacy = request.form['zamawiajacy']
+            odprawia = request.form['odprawia']
+            ofiara = request.form['ofiara']
+            data_str = data + ' ' + godzina
+            data_obj = datetime.datetime.strptime(data_str, '%Y-%m-%d %H:%M')
+            conn.execute(""" insert into msze (data, zamawiajacy, odprawia, ofiara) VALUES ('{}', '{}', '{}', '{}') """.format(data_obj, zamawiajacy, odprawia, ofiara))
         return render_template('mass_database.html', data = data)
     else:
         return redirect('/login')
 
-@app.route('/new_admin', methods=['GET', 'POST'])
-def new_admin():
-    conn = db.session.connection()
-    if ('id_admin' in session):
-        if request.method == "POST":
-            imie = request.form['imie']
-            nazwisko = request.form['nazwisko']
-            id_admina = request.form['id_admina']
-            status = request.form['status']
-            haslo = request.form['password']
-            hash_haslo = generate_password_hash(haslo)
-            conn.execute(""" insert into administratorzy (id_admin, nazwisko, imie, status, haslo) VALUES ('{}', '{}', '{}', '{}', '{}')""".format(id_admina, nazwisko, imie, status, hash_haslo))
-        return render_template('new_admin.html')
-    else:
-        redirect('/login')
+#@app.route('/new_admin', methods=['GET', 'POST'])
+#def new_admin():
+#    conn = db.session.connection()
+#    if ('id_admin' in session):
+#        if request.method == "POST":
+#            imie = request.form['imie']
+#            nazwisko = request.form['nazwisko']
+#            id_admina = request.form['id_admina']
+#            status = request.form['status']
+#            haslo = request.form['password']
+#            hash_haslo = generate_password_hash(haslo)
+#            conn.execute(""" insert into administratorzy (id_admin, nazwisko, imie, status, haslo) VALUES ('{}', '{}', '{}', '{}', '{}')""".format(id_admina, nazwisko, imie, status, hash_haslo))
+#        return render_template('new_admin.html')
+#    else:
+#        redirect('/login')
 
 if __name__ == "__main__":
     app.run(debug=True)
