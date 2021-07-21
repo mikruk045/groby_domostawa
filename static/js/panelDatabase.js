@@ -73,8 +73,8 @@ if(window.innerWidth < 490){
 }
 
 
-let tabela = document.getElementById('table');
-let rows = document.getElementsByClassName('records');
+// let tabela = document.getElementById('table');
+// let rows = document.getElementsByClassName('records');
 let panelContent = document.getElementsByClassName('panelContent')[0];
 
 let paginatorDiv = document.getElementById("paginatorDiv");
