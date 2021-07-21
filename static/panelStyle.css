@@ -488,6 +488,10 @@ td {
     background-color: rgb(224, 224, 224);
 }
 
+.tdEdit{
+    padding: 2rem 4rem;
+}
+
 @media screen and (max-width:1300px){
     .flexBase{
         flex-direction: column;
@@ -590,6 +594,16 @@ td {
 
     .panelContent{
         padding: 5%;
+    }
+}
+
+@media screen and (max-width:580px){
+    .modal-content{
+        width: 80%;
+    }
+
+    .tdEdit{
+        padding: 2rem 0;
     }
 }
 

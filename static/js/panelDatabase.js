@@ -129,7 +129,8 @@ function createExpand(record){
     nextTr = document.createElement('tr');
     let nextTd = document.createElement('td');
     nextTd.colSpan = '100';
-    nextTd.style.padding = '2rem 4rem'
+    nextTd.classList.add('tdEdit');
+    // nextTd.style.padding = '2rem 4rem'
     if(expandContent.innerHTML !== ''){
         nextTd.appendChild(expandContent);
     }   
