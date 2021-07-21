@@ -424,8 +424,69 @@ td {
     color: rgb(110, 110, 110);
 }
 
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 9999; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+      border-radius: 5px;
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 40px 20px;
+    height: auto;
+    text-align: center;
+    border: 1px solid #888;
+    width: 450px; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    display: none;
+    top: 0;
+    color: #aaa;
+    /* float: right; */
+    height: auto;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
 
+.flexDelete{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
 
+.deleteButton{
+    /* background-color: #f94144; */
+}
+
+.noDeleteButton{
+    background-color: #fff;
+    border: #cecece;
+    color: #000;
+}
+
+.noDeleteButton:hover{
+    background-color: rgb(224, 224, 224);
+}
 
 @media screen and (max-width:1300px){
     .flexBase{

@@ -14,6 +14,20 @@
     {% block head %}{% endblock %}
 </head>
 <body>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <div>Czy na pewno chcesz usunąć rekord <span id="imieNaz"></span> ?</div>
+          <div class="flexDelete">
+              <div class="flexDeleteCont">
+                <button class="inputSubmitModal deleteButton" id="deleteButton">Tak</button>
+              </div>
+              <div class="flexDeleteCont">
+                <button class="inputSubmitModal noDeleteButton">Nie</button>
+              </div>
+          </div>
+        </div>
+      </div>
     <div class="mobileNav">
         <div class="mobileTitle">
             Parafia pw. Matki Bożej Królowej Polski <br> <div class="siteName2">w Domostawie</div>
@@ -42,8 +56,8 @@
             <a id="dodajzmarlego"  href="/record">Dodaj zmarłego</a>
             <div class="category">Msze w kościele</div>
             <hr>
-            <a id="przegladajmsze" href="/mass_database">Przeglądaj msze</a>
-            <a id="dodajmsze" href="/add_mass">Dodaj mszę</a>
+            <a id="przegladajmsze" href="/mass_database">Dodaj i przeglądaj msze</a>
+            <!-- <a id="dodajmsze" href="/add_mass">Dodaj mszę</a> -->
             <div class="category">Administratorzy</div>
             <hr>
             <a id="dodajadmina" href="/new_admin">Dodaj administratora</a>

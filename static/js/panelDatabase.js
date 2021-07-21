@@ -358,4 +358,4 @@ window.addEventListener('resize',()=>{
             col.style.display = 'table-cell';
         }
     }
-})
+});
