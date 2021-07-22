@@ -47,7 +47,7 @@ for(let deleteButton of deleteButtons){
                     window.location.reload(true);
                 }else{
                     // window.location.reload(true);
-                    // alert('błąd');
+                    alert('błąd');
                 }
             })
         })
