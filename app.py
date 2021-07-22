@@ -129,7 +129,7 @@ def database():
     conn = db.session.connection()
     if ('id_admin' in session):
         
-        data1 = rows_as_dicts(conn.execute(""" 
+        data = rows_as_dicts(conn.execute(""" 
         select zm.id, zm.imie, zm.nazwisko, TO_CHAR(zm.data_urodzenia, 'DD.MM.YYYY') as data_urodzenia, TO_CHAR(zm.data_zgonu, 'DD.MM.YYYY') as data_zgonu, zm.przyczyna, zm.inf_dodat, 
         miej.nazwa, zm.nr_adres, kw.id_kwatera, zm.id_admin, ad.status
         from zmarli zm
@@ -143,8 +143,7 @@ def database():
     
         """).cursor)
         data2 = [json.dumps(session['id_admin']), json.dumps(session['imie_nazwisko'])]
-        data = [data1, data2]
-        return render_template('database.html', data = data)
+        return render_template('database.html', data, data2)
     else:
         return redirect('/login')
 
@@ -220,7 +219,7 @@ def admin_database():
 def mass_database():
     conn = db.session.connection()
     if ('id_admin' in session):
-        data1 = rows_as_dicts(conn.execute("""
+        data = rows_as_dicts(conn.execute("""
 
         select * from msze
         order by data
@@ -235,8 +234,7 @@ def mass_database():
             data_obj = datetime.datetime.strptime(data_str, '%Y-%m-%d %H:%M')
             conn.execute(""" insert into msze (data, zamawiajacy, odprawia) VALUES ('{}', '{}', '{}') """.format(data_obj, zamawiajacy, odprawia))
         data2 = [json.dumps(session['id_admin']), json.dumps(session['imie_nazwisko'])]
-        data = [data1, data2]
-        return render_template('mass_database.html', data = data)
+        return render_template('mass_database.html', data, data2)
     else:
         return redirect('/login')
 
