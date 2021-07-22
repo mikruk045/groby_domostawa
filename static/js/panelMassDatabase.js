@@ -7,7 +7,7 @@ for(let deleteButton of deleteButtons){
         console.log(deleteButton);
         event.stopPropagation();
         let imieNaz = document.getElementById('imieNaz');
-        imieNaz.innerHTML = `<b>${deleteButton.parentNode.parentElement.children[0].textContent} ${deleteButton.parentNode.parentElement.children[1].textContent}</b>`
+        imieNaz.innerHTML = `z datą <b>${deleteButton.parentNode.parentElement.children[0].textContent}</b>`
         modal.style.display = "block";
         let rowID = deleteButton.parentNode.parentElement.id;
         acceptDelete.addEventListener('click',()=>{
