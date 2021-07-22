@@ -209,6 +209,7 @@ def admin_database():
             haslo = request.form['password']
             hash_haslo = generate_password_hash(haslo)
             conn.execute(""" insert into administratorzy (id_admin, nazwisko, imie, status, haslo) VALUES ('{}', '{}', '{}', '{}', '{}')""".format(id_admina, nazwisko, imie, status, hash_haslo))
+            #return redirect('/admin_database')
         data2 = [json.dumps(session['id_admin']), json.dumps(session['imie_nazwisko'])]
         return render_template('admin_database.html', data = data, data2 = data2)
     else:
