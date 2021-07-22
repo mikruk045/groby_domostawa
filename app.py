@@ -57,7 +57,7 @@ def cmentarz():
      """).cursor)
     kwatery = json.dumps(kwatery)
     zmarli = json.dumps(zmarli) 
-    data = [kwatery, zmarli, WGS_json_from_db("*", "kwatery", conn)]
+    data = [zmarli, WGS_json_from_db("*", "kwatery", conn)]
     return render_template('cmentarz.html', dane = data)
 
 
