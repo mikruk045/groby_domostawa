@@ -157,8 +157,8 @@ def database_delete(id):
     return "Rekord został usunięty"
 
 
-@app.route('/database_edit/', methods=['GET', 'POST'])
-def database_edit():
+@app.route('/database_edit/<id>', methods=['GET', 'POST'])
+def database_edit(id):
     conn = db.session.connection()
     if request.method == 'POST':
         if ('id_admin' in session):
@@ -172,7 +172,7 @@ def database_edit():
             kwatera = request.form['kwatera']
             info_dodat = request.form['info_dodat']
             id_miejscowosci = rows_as_dicts(conn.execute(""" select id_miejscowosci from miejscowosci where nazwa = '{}' """.format(miejscowosc)).cursor)
-            id_obiektu = request.form['id']
+            id_obiektu = id
             if data_ur == "":
                 data_ur = "NULL"
                 if data_zg == "":
