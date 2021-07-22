@@ -235,7 +235,7 @@ def mass_database():
             data_str = data + ' ' + godzina
             data_obj = datetime.datetime.strptime(data_str, '%Y-%m-%d %H:%M')
             conn.execute(""" insert into msze (data, zamawiajacy, odprawia) VALUES ('{}', '{}', '{}') """.format(data_obj, zamawiajacy, odprawia))
-            return render_template('mass_database.html', data = data, data2 = data2)
+            return redirect('/mass_database')
         return render_template('mass_database.html', data = data, data2 = data2)
     else:
         return redirect('/login')
