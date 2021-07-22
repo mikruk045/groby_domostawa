@@ -1,22 +1,77 @@
-{% block head %}
+{% extends 'basePanel.html' %}
 
+{% block head %}
+<link rel="stylesheet" href="/static/panelMassStyle.css">
+<script src="/static/js/panelTableMain.js" defer></script>
+<script src="/static/js/panelModal.js" defer></script>
+<script src="/static/js/panelRecord.js" defer></script>
+<script src="/static/js/panelAdminRecord.js" defer></script>
+<script src="/static/js/panelAdminDatabase.js" defer></script>
 {% endblock %}
 
-{% block body %}
-<h1>Baza danych</h1>
-<table style="width:100%">
-  <tr>
-    <th>Identyfikator administratora</th>
-    <th>Imię</th>
-    <th>Nazwisko</th>
-    <th>Status administratora</th>
+{% block panelContent %}
+<script>
+  document.getElementById('przegladajadmina').removeAttribute('href');
+  document.getElementById('przegladajadmina').classList.add('activeTab');
+</script>
+<div class="subdomainTitle">Dodaj i przeglądaj administratorów</div>
+
+<div class="flexRows flexTableForm">
+<div class="recordContainer addMassForm">
+  <form action="" method="post" id="form">
+    <div class="flexRows">
+      <div class="flexContainer">
+        <label class="requiredField" for="imie">Imię administratora</label>
+        <input class="inputText requiredInput" type="text" id="imie" name="imie" value="">
+        <div class="messageInput"><span>Imię może zawierać tylko litery</span></div>
+      </div>
+      <div class="flexContainer">
+        <label class="requiredField" for="nazwisko">Nazwisko administratora</label>
+        <input class="inputText requiredInput" type="text" id="nazwisko" name="nazwisko" value="">
+        <div class="messageInput"><span>Nazwisko może zawierać tylko litery</span></div>
+      </div>
+    </div>
+    <div class="flexRows">
+      <div class="flexContainer">
+        <label class="requiredField" for="id_admina">Identyfikator administratora (używany jako login)</label>
+        <input class="inputText requiredInput" type="text" id="id_admina" name="id_admina" value="">
+        <div class="messageInput"><span>Nazwa użytkownika może zawierać tylko litery, cyfry oraz znaki specjalne _-.</span></div>
+      </div>
+    </div>
+    <div class="flexRows">
+      <div class="flexContainer">
+        <label class="requiredField" for="status">Status administratora</label>
+        <input class="inputText requiredInput" type="text" id="status" name="status" value="">
+        <div class="messageInput"><span>Status może zawierać tylko litery</span></div>
+      </div>
+    </div>
+    <div class="flexRows">
+      <div class="flexContainer">
+        <label class="requiredField" for="password">Hasło</label>
+        <input class="inputText requiredInput" type="text" id="password" name="password" value="">
+        <div class="messageInput"><span>Hasło musi zawierać przynajmniej 1 wielką literę, 1 małą literę, jedną cyfrę oraz być dłuższe od 5 znaków</span></div>
+      </div>
+    </div>
+    <br><br>
+    <button class="inputSubmit" disabled type="submit">Dodaj</button>
+</form>
+</div>
+
+<table id="table" style="width:100%">
+  <tr class="columns">
+    <th class="col0">Identyfikator administratora</th>
+    <th class="col1">Imię</th>
+    <th class="col2">Nazwisko</th>
+    <th class="col3">Status administratora</th>
   </tr>
   {% for d in data %}
-  <tr>
-    <td>{{d['id_admin']}}</td>
-    <td>{{d['imie']}}</td>
-    <td>{{d['nazwisko']}}</td>
-    <td>{{d['status']}}</td>
+  <tr class="records" id="{{d['id_admin']}}">
+    <td class="col0 id_admin"><b>{{d['id_admin']}}</b></td>
+    <td class="col1 imie">{{d['imie']}}</td>
+    <td class="col2 nazwisko">{{d['nazwisko']}}</td>
+    <td class="col3 status">{{d['status']}}</td>
   </tr>
   {% endfor %}
+</table>
+</div>
 {% endblock %}

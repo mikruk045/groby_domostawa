@@ -22,6 +22,15 @@ function validateTextfield(textfield) {
     }
 }
 
+function validateNickname(name) {
+    const re = /^[a-zA-Z0-9-_]+$/;
+    if(name.match(re) && name.length < 150){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 function validateName(name) {
     const re = /^[a-zA-ZźŹżŻąĄęĘóÓłŁćĆśŚńŃ-]+$/;
     if(name.match(re) && name.length < 150){

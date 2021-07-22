@@ -1,5 +1,7 @@
 "use strict";
 
+tableInteraction(true);
+
 let deleteButtons = document.getElementsByClassName('delete');
 
 for(let deleteButton of deleteButtons){

@@ -5,72 +5,9 @@
 //     col.style.display = 'none';
 // }
 
-if(window.innerWidth < 1480){
-    let col7 = document.getElementsByClassName('col7')
-    for(let col of col7){
-        col.style.display = 'none';
-    }
-}else{
-    let col7 = document.getElementsByClassName('col7')
-    for(let col of col7){
-        col.style.display = 'table-cell';
-    }
-}
-if(window.innerWidth < 1360){
-    let col9 = document.getElementsByClassName('col9')
-    for(let col of col9){
-        col.style.display = 'none';
-    }
-}else{
-    let col9 = document.getElementsByClassName('col9')
-    for(let col of col9){
-        col.style.display = 'table-cell';
-    }
-}
-if(window.innerWidth < 1200){
-    let col6 = document.getElementsByClassName('col6')
-    for(let col of col6){
-        col.style.display = 'none';
-    }
-}else{
-    let col6 = document.getElementsByClassName('col6')
-    for(let col of col6){
-        col.style.display = 'table-cell';
-    }
-}
-if(window.innerWidth < 1060){
-    let col4 = document.getElementsByClassName('col4')
-    for(let col of col4){
-        col.style.display = 'none';
-    }
-}else{
-    let col4 = document.getElementsByClassName('col4')
-    for(let col of col4){
-        col.style.display = 'table-cell';
-    }
-}
-if(window.innerWidth < 935){
-    let col2 = document.getElementsByClassName('col2')
-    for(let col of col2){
-        col.style.display = 'none';
-    }
-}else{
-    let col2 = document.getElementsByClassName('col2')
-    for(let col of col2){
-        col.style.display = 'table-cell';
-    }
-}
-if(window.innerWidth < 490){
-    let col3 = document.getElementsByClassName('col3')
-    for(let col of col3){
-        col.style.display = 'none';
-    }
-}else{
-    let col3 = document.getElementsByClassName('col3')
-    for(let col of col3){
-        col.style.display = 'table-cell';
-    }
-}
+
+
+tableInteraction(true);
 
 
 // let tabela = document.getElementById('table');
@@ -84,6 +21,7 @@ let paginatorButtons = paginatorDiv.getElementsByTagName('button');
 window.addEventListener('load',()=>{
     document.getElementsByClassName('loading')[0].remove();
     document.getElementsByClassName('tablecontent')[0].style.display = 'block';
+    responsiveTable('database');
 })
 
 paginator({
@@ -286,81 +224,85 @@ for(let button of paginatorButtons){
 }
 
 window.addEventListener('resize',()=>{
-    if(window.innerWidth < 1480){
-        let col7 = document.getElementsByClassName('col7')
-        for(let col of col7){
-            col.style.display = 'none';
-        }
-    }else{
-        let col7 = document.getElementsByClassName('col7')
-        for(let col of col7){
-            col.style.display = 'table-cell';
-        }
-    }
-    if(window.innerWidth < 1360){
-        let col9 = document.getElementsByClassName('col9')
-        for(let col of col9){
-            col.style.display = 'none';
-        }
-    }else{
-        let col9 = document.getElementsByClassName('col9')
-        for(let col of col9){
-            col.style.display = 'table-cell';
-        }
-    }
-    if(window.innerWidth < 1200){
-        // nextTr.remove();
-        let col6 = document.getElementsByClassName('col6')
-        for(let col of col6){
-            col.style.display = 'none';
-        }
-    }else{
-        // nextTr.remove();
-        let col6 = document.getElementsByClassName('col6')
-        for(let col of col6){
-            col.style.display = 'table-cell';
-        }
-    }
-    if(window.innerWidth < 1060){
-        // nextTr.remove();
-        let col4 = document.getElementsByClassName('col4')
-        for(let col of col4){
-            col.style.display = 'none';
-        }
-    }else{
-        // nextTr.remove();
-        let col4 = document.getElementsByClassName('col4')
-        for(let col of col4){
-            col.style.display = 'table-cell';
-        }
-    }
-    if(window.innerWidth < 935){
-        // nextTr.remove();
-        let col2 = document.getElementsByClassName('col2')
-        for(let col of col2){
-            col.style.display = 'none';
-        }
-    }else{
-        // nextTr.remove();
-        let col2 = document.getElementsByClassName('col2')
-        for(let col of col2){
-            col.style.display = 'table-cell';
-        }
-    }
-    if(window.innerWidth < 490){
-        // nextTr.remove();
-        let col3 = document.getElementsByClassName('col3')
-        for(let col of col3){
-            col.style.display = 'none';
-        }
-    }else{
-        // nextTr.remove();
-        let col3 = document.getElementsByClassName('col3')
-        for(let col of col3){
-            col.style.display = 'table-cell';
-        }
-    }
+    responsiveTable('database');
 });
+
+// window.addEventListener('resize',()=>{
+//     if(window.innerWidth < 1480){
+//         let col7 = document.getElementsByClassName('col7')
+//         for(let col of col7){
+//             col.style.display = 'none';
+//         }
+//     }else{
+//         let col7 = document.getElementsByClassName('col7')
+//         for(let col of col7){
+//             col.style.display = 'table-cell';
+//         }
+//     }
+//     if(window.innerWidth < 1360){
+//         let col9 = document.getElementsByClassName('col9')
+//         for(let col of col9){
+//             col.style.display = 'none';
+//         }
+//     }else{
+//         let col9 = document.getElementsByClassName('col9')
+//         for(let col of col9){
+//             col.style.display = 'table-cell';
+//         }
+//     }
+//     if(window.innerWidth < 1200){
+//         // nextTr.remove();
+//         let col6 = document.getElementsByClassName('col6')
+//         for(let col of col6){
+//             col.style.display = 'none';
+//         }
+//     }else{
+//         // nextTr.remove();
+//         let col6 = document.getElementsByClassName('col6')
+//         for(let col of col6){
+//             col.style.display = 'table-cell';
+//         }
+//     }
+//     if(window.innerWidth < 1060){
+//         // nextTr.remove();
+//         let col4 = document.getElementsByClassName('col4')
+//         for(let col of col4){
+//             col.style.display = 'none';
+//         }
+//     }else{
+//         // nextTr.remove();
+//         let col4 = document.getElementsByClassName('col4')
+//         for(let col of col4){
+//             col.style.display = 'table-cell';
+//         }
+//     }
+//     if(window.innerWidth < 935){
+//         // nextTr.remove();
+//         let col2 = document.getElementsByClassName('col2')
+//         for(let col of col2){
+//             col.style.display = 'none';
+//         }
+//     }else{
+//         // nextTr.remove();
+//         let col2 = document.getElementsByClassName('col2')
+//         for(let col of col2){
+//             col.style.display = 'table-cell';
+//         }
+//     }
+//     if(window.innerWidth < 490){
+//         // nextTr.remove();
+//         let col3 = document.getElementsByClassName('col3')
+//         for(let col of col3){
+//             col.style.display = 'none';
+//         }
+//     }else{
+//         // nextTr.remove();
+//         let col3 = document.getElementsByClassName('col3')
+//         for(let col of col3){
+//             col.style.display = 'table-cell';
+//         }
+//     }
+// });
 
 let deleteButtons = document.getElementsByClassName('delete');
 
