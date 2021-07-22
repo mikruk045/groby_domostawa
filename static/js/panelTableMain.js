@@ -12,13 +12,16 @@ for(let i=0; i< rows.length; i++){
         rows[i].addEventListener('click',()=>{
             if(elemSelected === rows[i].id){
                 rows[i].blur();
-                if(nextTr !== undefined){
+                if(typeof nextTr !== undefined){
                     nextTr.remove();
                 }
                 elemSelected = undefined;
             }else{
                 rows[i].focus();
-                createExpand(rows[i]);
+                if(typeof createExpand === 'function'){
+                    createExpand(rows[i]);
+                }   
+                
                 elemSelected = rows[i].id;
                 elemDOM = rows[i];
             }
