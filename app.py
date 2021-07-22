@@ -226,6 +226,7 @@ def mass_database():
         order by data
 
         """).cursor)
+        data2 = [json.dumps(session['id_admin']), json.dumps(session['imie_nazwisko'])]
         if request.method == 'POST':
             data = request.form['data']
             godzina = request.form['czas']
@@ -234,7 +235,7 @@ def mass_database():
             data_str = data + ' ' + godzina
             data_obj = datetime.datetime.strptime(data_str, '%Y-%m-%d %H:%M')
             conn.execute(""" insert into msze (data, zamawiajacy, odprawia) VALUES ('{}', '{}', '{}') """.format(data_obj, zamawiajacy, odprawia))
-        data2 = [json.dumps(session['id_admin']), json.dumps(session['imie_nazwisko'])]
+            return render_template('mass_database.html', data = data, data2 = data2)
         return render_template('mass_database.html', data = data, data2 = data2)
     else:
         return redirect('/login')
