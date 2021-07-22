@@ -118,7 +118,7 @@ def record():
                 conn.execute(""" insert into zmarli (id, nazwisko, imie, data_urodzenia, data_zgonu, przyczyna, id_miejscowosc, nr_adres, id_admin, inf_dodat) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}') """.format(str(int(max_id[0]['max'])+1), nazwisko, imie,data_ur, data_zg, przyczyna, id_miejscowosci[0]['id_miejscowosci'], nr_adres, session.get('id_admin')['id_admin'], info_dodat))
 
             conn.execute(""" insert into zmarli_kwatery (id_kwatera, id, id_zmarly) VALUES ('{}', '{}', '{}') """.format(kwatera, str(int(max_id_2[0]['max'])+1), str(int(max_id[0]['max'])+1)))
-        data = [json.dumps(session['id_admin'], session['imie_nazwisko'])]
+        data = [json.dumps(session['id_admin']), json.dumps(session['imie_nazwisko'])]
         return render_template('record.html', data = data)
     else:
         return redirect('/login')
@@ -142,7 +142,7 @@ def database():
          order by zm.nazwisko;
     
         """).cursor)
-        data2 = [json.dumps(session['id_admin'], session['imie_nazwisko'])]
+        data2 = [json.dumps(session['id_admin']), json.dumps(session['imie_nazwisko'])]
         data = [data1, data2]
         return render_template('database.html', data = data)
     else:
@@ -186,7 +186,7 @@ def database_edit(id):
             else:
                 conn.execute(""" update zmarli set nazwisko = '{}', imie = '{}', data_urodzenia = '{}', data_zgonu = '{}', przyczyna = '{}', id_miejscowosc = '{}', nr_adres = '{}', id_admin = '{}', inf_dodat = '{}' where id = '{}' """.format(nazwisko, imie, data_ur, data_zg, przyczyna, id_miejscowosci, nr_adres, session.get('id_admin')['id_admin'], info_dodat, id_obiektu))
             conn.execute(""" update zmarli_kwatery id_kwatera = '{}' where id_zmarly = '{}' """.format(kwatera, id_obiektu))
-            data = [json.dumps(session['id_admin'], session['imie_nazwisko'])]
+            data = [json.dumps(session['id_admin']), json.dumps(session['imie_nazwisko'])]
             return render_template('database.html', data = data)
     else:
         return render_template('database.html')
@@ -234,7 +234,7 @@ def mass_database():
             data_str = data + ' ' + godzina
             data_obj = datetime.datetime.strptime(data_str, '%Y-%m-%d %H:%M')
             conn.execute(""" insert into msze (data, zamawiajacy, odprawia) VALUES ('{}', '{}', '{}') """.format(data_obj, zamawiajacy, odprawia))
-        data2 = [json.dumps(session['id_admin'], session['imie_nazwisko'])]
+        data2 = [json.dumps(session['id_admin']), json.dumps(session['imie_nazwisko'])]
         data = [data1, data2]
         return render_template('mass_database.html', data = data)
     else:
