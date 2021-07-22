@@ -176,14 +176,14 @@ def database_edit(id):
                 data_ur = "NULL"
                 if data_zg == "":
                     data_zg = "NULL"
-                    conn.execute(""" update zmarli set nazwisko = '{}', imie = '{}', data_urodzenia = {}, data_zgonu = {}, przyczyna = '{}', id_miejscowosc = '{}', nr_adres = '{}', id_admin = '{}', inf_dodat = '{}' where id = '{}' """.format(nazwisko, imie, data_ur, data_zg, przyczyna, id_miejscowosci, nr_adres, session.get('id_admin')['id_admin'], info_dodat, id_obiektu))
+                    conn.execute(""" update zmarli set nazwisko = '{}', imie = '{}', data_urodzenia = {}, data_zgonu = {}, przyczyna = '{}', id_miejscowosc = '{}', nr_adres = '{}', id_admin = '{}', inf_dodat = '{}' where id = '{}' """.format(nazwisko, imie, data_ur, data_zg, przyczyna, id_miejscowosci[0]['id_miejscowosci'], nr_adres, session.get('id_admin')['id_admin'], info_dodat, id_obiektu))
                 else:
-                    conn.execute(""" update zmarli set nazwisko = '{}', imie = '{}', data_urodzenia = {}, data_zgonu = '{}', przyczyna = '{}', id_miejscowosc = '{}', nr_adres = '{}', id_admin = '{}', inf_dodat = '{}' where id = '{}' """.format(nazwisko, imie, data_ur, data_zg, przyczyna, id_miejscowosci, nr_adres, session.get('id_admin')['id_admin'], info_dodat, id_obiektu))
+                    conn.execute(""" update zmarli set nazwisko = '{}', imie = '{}', data_urodzenia = {}, data_zgonu = '{}', przyczyna = '{}', id_miejscowosc = '{}', nr_adres = '{}', id_admin = '{}', inf_dodat = '{}' where id = '{}' """.format(nazwisko, imie, data_ur, data_zg, przyczyna, id_miejscowosci[0]['id_miejscowosci'], nr_adres, session.get('id_admin')['id_admin'], info_dodat, id_obiektu))
             elif data_zg == "":
                 data_zg = "NULL"
-                conn.execute(""" update zmarli set nazwisko = '{}', imie = '{}', data_urodzenia = '{}', data_zgonu = {}, przyczyna = '{}', id_miejscowosc = '{}', nr_adres = '{}', id_admin = '{}', inf_dodat = '{}' where id = '{}' """.format(nazwisko, imie, data_ur, data_zg, przyczyna, id_miejscowosci, nr_adres, session.get('id_admin')['id_admin'], info_dodat, id_obiektu))
+                conn.execute(""" update zmarli set nazwisko = '{}', imie = '{}', data_urodzenia = '{}', data_zgonu = {}, przyczyna = '{}', id_miejscowosc = '{}', nr_adres = '{}', id_admin = '{}', inf_dodat = '{}' where id = '{}' """.format(nazwisko, imie, data_ur, data_zg, przyczyna, id_miejscowosci[0]['id_miejscowosci'], nr_adres, session.get('id_admin')['id_admin'], info_dodat, id_obiektu))
             else:
-                conn.execute(""" update zmarli set nazwisko = '{}', imie = '{}', data_urodzenia = '{}', data_zgonu = '{}', przyczyna = '{}', id_miejscowosc = '{}', nr_adres = '{}', id_admin = '{}', inf_dodat = '{}' where id = '{}' """.format(nazwisko, imie, data_ur, data_zg, przyczyna, id_miejscowosci, nr_adres, session.get('id_admin')['id_admin'], info_dodat, id_obiektu))
+                conn.execute(""" update zmarli set nazwisko = '{}', imie = '{}', data_urodzenia = '{}', data_zgonu = '{}', przyczyna = '{}', id_miejscowosc = '{}', nr_adres = '{}', id_admin = '{}', inf_dodat = '{}' where id = '{}' """.format(nazwisko, imie, data_ur, data_zg, przyczyna, id_miejscowosci[0]['id_miejscowosci'], nr_adres, session.get('id_admin')['id_admin'], info_dodat, id_obiektu))
             conn.execute(""" update zmarli_kwatery id_kwatera = '{}' where id_zmarly = '{}' """.format(kwatera, id_obiektu))
             data = [json.dumps(session['id_admin']), json.dumps(session['imie_nazwisko'])]
             return render_template('database.html', data = data)
