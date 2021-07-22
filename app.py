@@ -180,28 +180,6 @@ def database_edit():
         return render_template('database.html')
 
 
-@app.route('/add_mass', methods = ['GET', 'POST'])
-def add_mass():
-    conn = db.session.connection()
-    if ('id_admin' in session):
-        if request.method == 'POST':
-            data = request.form['data']
-            godzina = request.form['czas']
-            zamawiajacy = request.form['zamawiajacy']
-            odprawia = request.form['odprawia']
-            data_str = data + ' ' + godzina
-            data_obj = datetime.datetime.strptime(data_str, '%Y-%m-%d %H:%M')
-            conn.execute(""" insert into msze (data, zamawiajacy, odprawia) VALUES ('{}', '{}', '{}') """.format(data_obj, zamawiajacy, odprawia))
-        return render_template('add_mass.html')
-    else:
-        return redirect('/login')
-
-@app.route('/add_mass/<date>')
-def delete_mass(date):
-    conn = db.session.connection()
-    conn.execute(""" delete from msze where data = '{}' """.format(date))
-
-
 
 @app.route('/admin_database')
 def admin_database():
@@ -223,6 +201,7 @@ def admin_database():
         return render_template('admin_database.html', data = data)
     else:
         return redirect('/login')
+
 
 
 @app.route('/mass_database', methods = ['GET', 'POST'])
@@ -247,6 +226,16 @@ def mass_database():
         return render_template('mass_database.html', data = data)
     else:
         return redirect('/login')
+
+
+
+@app.route('/delete_mass/<date>')
+def delete_mass(date):
+    conn = db.session.connection()
+    conn.execute(""" delete from msze where data = '{}' """.format(date))
+    return "Msza zosała usunięta z bazy"
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
