@@ -33,7 +33,7 @@ paginator({
 
 let nextTr;
 
-function createExpand(record){
+function createExpand(record, id_row){
     if(nextTr !== undefined){
         nextTr.remove();
     }
@@ -76,7 +76,7 @@ function createExpand(record){
 
     let recordContainer = document.createElement('div');
     recordContainer.classList.add('recordContainer');
-    recordContainer.innerHTML = `        <form action="/database_edit/" method="post" id="form">
+    recordContainer.innerHTML = `        <form action="/database_edit/${id_row}" method="post" id="form">
     
     <div class="flexRows flexEditDatabase">
         <div class="flexContainer">

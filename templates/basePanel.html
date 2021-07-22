@@ -10,6 +10,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/panelStyle.css">
     <script src="/static/js/panelScript.js" defer></script>
+    <script>
+        let adminData = '{{ data2[1] | tojson }}';
+        adminData = adminData.substring(1, adminData.length-1);
+        adminData = JSON.parse(adminData);
+
+        let adminNick = '{{ data2[0] | tojson }}';
+        adminNick = adminNick.substring(1, adminNick.length-1);
+        adminNick = JSON.parse(adminNick);
+    </script>
     <!-- <script src=""></script> -->
     {% block head %}{% endblock %}
 </head>
@@ -46,6 +55,8 @@
     <div class="sidepanel">
         <div class="panelInfo">
             <div class="siteName">Parafia pw. Matki Bożej Królowej Polski <br> <div class="siteName2">w Domostawie</div></div>
+        </div>
+        <div class="adminInfos">
         </div>
         <div class="menu">
             <a href="/">Strona główna</a>

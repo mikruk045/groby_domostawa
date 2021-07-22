@@ -21,7 +21,7 @@ function tableInteraction(deleteState){
                 }else{
                     rows[i].focus();
                     if(typeof createExpand === 'function'){
-                        createExpand(rows[i]);
+                        createExpand(rows[i], rows[i].id);
                     }   
                     
                     elemSelected = rows[i].id;
