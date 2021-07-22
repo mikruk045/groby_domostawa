@@ -96,7 +96,19 @@ def record():
             max_id = rows_as_dicts(conn.execute(""" select max(id) from zmarli """).cursor)
             max_id_2 = rows_as_dicts(conn.execute(""" select max(id) from zmarli_kwatery """).cursor)
 
-            conn.execute(""" insert into zmarli (id, nazwisko, imie, data_urodzenia, data_zgonu, przyczyna, id_miejscowosc, nr_adres, id_admin, inf_dodat) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}') """.format(str(int(max_id[0]['max'])+1), nazwisko, imie,data_ur, data_zg, przyczyna, id_miejscowosci[0]['id_miejscowosci'], nr_adres, session.get('id_admin')['id_admin'], info_dodat))
+            if data_ur == "":
+                data_ur = "NULL"
+                if data_zg == "":
+                    data_zg = "NULL"
+                    conn.execute(""" insert into zmarli (id, nazwisko, imie, data_urodzenia, data_zgonu, przyczyna, id_miejscowosc, nr_adres, id_admin, inf_dodat) VALUES ('{}', '{}', '{}', {}, {}, '{}', '{}', '{}', '{}', '{}') """.format(str(int(max_id[0]['max'])+1), nazwisko, imie,data_ur, data_zg, przyczyna, id_miejscowosci[0]['id_miejscowosci'], nr_adres, session.get('id_admin')['id_admin'], info_dodat))
+                else:
+                    conn.execute(""" insert into zmarli (id, nazwisko, imie, data_urodzenia, data_zgonu, przyczyna, id_miejscowosc, nr_adres, id_admin, inf_dodat) VALUES ('{}', '{}', '{}', {}, '{}', '{}', '{}', '{}', '{}', '{}') """.format(str(int(max_id[0]['max'])+1), nazwisko, imie,data_ur, data_zg, przyczyna, id_miejscowosci[0]['id_miejscowosci'], nr_adres, session.get('id_admin')['id_admin'], info_dodat))
+            elif data_zg == "":
+                data_zg = "NULL"
+                conn.execute(""" insert into zmarli (id, nazwisko, imie, data_urodzenia, data_zgonu, przyczyna, id_miejscowosc, nr_adres, id_admin, inf_dodat) VALUES ('{}', '{}', '{}', '{}', {}, '{}', '{}', '{}', '{}', '{}') """.format(str(int(max_id[0]['max'])+1), nazwisko, imie,data_ur, data_zg, przyczyna, id_miejscowosci[0]['id_miejscowosci'], nr_adres, session.get('id_admin')['id_admin'], info_dodat))
+            else:
+                conn.execute(""" insert into zmarli (id, nazwisko, imie, data_urodzenia, data_zgonu, przyczyna, id_miejscowosc, nr_adres, id_admin, inf_dodat) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}') """.format(str(int(max_id[0]['max'])+1), nazwisko, imie,data_ur, data_zg, przyczyna, id_miejscowosci[0]['id_miejscowosci'], nr_adres, session.get('id_admin')['id_admin'], info_dodat))
+
             conn.execute(""" insert into zmarli_kwatery (id_kwatera, id, id_zmarly) VALUES ('{}', '{}', '{}') """.format(kwatera, str(int(max_id_2[0]['max'])+1), str(int(max_id[0]['max'])+1)))
         return render_template('record.html')
     else:
@@ -149,7 +161,18 @@ def database_edit():
             info_dodat = request.form['info_dodat']
             id_miejscowosci = rows_as_dicts(conn.execute(""" select id_miejscowosci from miejscowosci where nazwa = '{}' """.format(miejscowosc)).cursor)
             id_obiektu = request.form['id']
-            conn.execute(""" update zmarli set nazwisko = '{}', imie = '{}', data_urodzenia = '{}', data_zgonu = '{}', przyczyna = '{}', id_miejscowosc = '{}', nr_adres = '{}', id_admin = '{}', inf_dodat = '{}' where id = '{}' """.format(nazwisko, imie, data_ur, data_zg, przyczyna, id_miejscowosci, nr_adres, session.get('id_admin')['id_admin'], info_dodat, id_obiektu))
+            if data_ur == "":
+                data_ur = "NULL"
+                if data_zg == "":
+                    data_zg = "NULL"
+                    conn.execute(""" update zmarli set nazwisko = '{}', imie = '{}', data_urodzenia = {}, data_zgonu = {}, przyczyna = '{}', id_miejscowosc = '{}', nr_adres = '{}', id_admin = '{}', inf_dodat = '{}' where id = '{}' """.format(nazwisko, imie, data_ur, data_zg, przyczyna, id_miejscowosci, nr_adres, session.get('id_admin')['id_admin'], info_dodat, id_obiektu))
+                else:
+                    conn.execute(""" update zmarli set nazwisko = '{}', imie = '{}', data_urodzenia = {}, data_zgonu = '{}', przyczyna = '{}', id_miejscowosc = '{}', nr_adres = '{}', id_admin = '{}', inf_dodat = '{}' where id = '{}' """.format(nazwisko, imie, data_ur, data_zg, przyczyna, id_miejscowosci, nr_adres, session.get('id_admin')['id_admin'], info_dodat, id_obiektu))
+            elif data_zg == "":
+                data_zg = "NULL"
+                conn.execute(""" update zmarli set nazwisko = '{}', imie = '{}', data_urodzenia = '{}', data_zgonu = {}, przyczyna = '{}', id_miejscowosc = '{}', nr_adres = '{}', id_admin = '{}', inf_dodat = '{}' where id = '{}' """.format(nazwisko, imie, data_ur, data_zg, przyczyna, id_miejscowosci, nr_adres, session.get('id_admin')['id_admin'], info_dodat, id_obiektu))
+            else:
+                conn.execute(""" update zmarli set nazwisko = '{}', imie = '{}', data_urodzenia = '{}', data_zgonu = '{}', przyczyna = '{}', id_miejscowosc = '{}', nr_adres = '{}', id_admin = '{}', inf_dodat = '{}' where id = '{}' """.format(nazwisko, imie, data_ur, data_zg, przyczyna, id_miejscowosci, nr_adres, session.get('id_admin')['id_admin'], info_dodat, id_obiektu))
             conn.execute(""" update zmarli_kwatery id_kwatera = '{}' where id_zmarly = '{}' """.format(kwatera, id_obiektu))
             return render_template('database.html')
     else:
@@ -165,13 +188,18 @@ def add_mass():
             godzina = request.form['czas']
             zamawiajacy = request.form['zamawiajacy']
             odprawia = request.form['odprawia']
-            ofiara = request.form['ofiara']
             data_str = data + ' ' + godzina
             data_obj = datetime.datetime.strptime(data_str, '%Y-%m-%d %H:%M')
-            conn.execute(""" insert into msze (data, zamawiajacy, odprawia, ofiara) VALUES ('{}', '{}', '{}', '{}') """.format(data_obj, zamawiajacy, odprawia, ofiara))
+            conn.execute(""" insert into msze (data, zamawiajacy, odprawia) VALUES ('{}', '{}', '{}') """.format(data_obj, zamawiajacy, odprawia))
         return render_template('add_mass.html')
     else:
         return redirect('/login')
+
+@app.route('/add_mass/<date>')
+def delete_mass(date):
+    conn = db.session.connection()
+    conn.execute(""" delete from msze where data = '{}' """.format(date))
+
 
 
 @app.route('/admin_database')
@@ -194,16 +222,6 @@ def admin_database():
         return render_template('admin_database.html', data = data)
     else:
         return redirect('/login')
-
-#@app.route('/admin_database/<action1><action2>', methods=['GET', 'POST'])
-#def admin_database_action(action):
-#    conn = db.session.connection()
-#    if(action == 'edytuj'):
-#        #akcja
-#        return 0
-#    elif(action == 'usuń'):
-#        #akcja
-#        return 0
 
 
 @app.route('/mass_database', methods = ['GET', 'POST'])
@@ -228,22 +246,6 @@ def mass_database():
         return render_template('mass_database.html', data = data)
     else:
         return redirect('/login')
-
-#@app.route('/new_admin', methods=['GET', 'POST'])
-#def new_admin():
-#    conn = db.session.connection()
-#    if ('id_admin' in session):
-#        if request.method == "POST":
-#            imie = request.form['imie']
-#            nazwisko = request.form['nazwisko']
-#            id_admina = request.form['id_admina']
-#            status = request.form['status']
-#            haslo = request.form['password']
-#            hash_haslo = generate_password_hash(haslo)
-#            conn.execute(""" insert into administratorzy (id_admin, nazwisko, imie, status, haslo) VALUES ('{}', '{}', '{}', '{}', '{}')""".format(id_admina, nazwisko, imie, status, hash_haslo))
-#        return render_template('new_admin.html')
-#    else:
-#        redirect('/login')
 
 if __name__ == "__main__":
     app.run(debug=True)
