@@ -138,7 +138,7 @@ def database():
         return redirect('/login')
 
 
-@app.route('/database/<id>', methods=['GET', 'POST'])
+@app.route('/database_delete/<id>', methods=['GET', 'POST'])
 def database_delete(id):
     conn = db.session.connection()
     conn.execute(""" delete from zmarli where id = '{}' """.format(id))
