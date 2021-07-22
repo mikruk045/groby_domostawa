@@ -13,7 +13,7 @@ for(let deleteButton of deleteButtons){
         modal.style.display = "block";
         let rowID = deleteButton.parentNode.parentElement.id;
         acceptDelete.addEventListener('click',()=>{
-            let deleteRow = requestPOST(`${window.location.origin}/add_mass/${rowID}`);
+            let deleteRow = requestPOST(`${window.location.origin}/delete_mass/${rowID}`);
             deleteRow.addEventListener('load',()=>{
                 console.log(deleteRow.status);
                 if(deleteRow.status === 200){
