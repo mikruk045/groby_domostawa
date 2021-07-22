@@ -40,7 +40,7 @@ for(let deleteButton of deleteButtons){
         modal.style.display = "block";
         let rowID = deleteButton.parentNode.parentElement.id;
         acceptDelete.addEventListener('click',()=>{
-            let deleteRow = requestPOST(`${window.location.origin}/database/${rowID}`);
+            let deleteRow = requestPOST(`${window.location.origin}/database_delete/${rowID}`);
             deleteRow.addEventListener('load',()=>{
                 console.log(deleteRow.status);
                 if(deleteRow.status === 200){
