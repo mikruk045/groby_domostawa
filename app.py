@@ -130,7 +130,7 @@ def database():
         inner join administratorzy ad on zm.id_admin = ad.id_admin
         inner join miejscowosci miej on zm.id_miejscowosc = miej.id_miejscowosci
 
-         order by zm.data_zgonu;
+         order by zm.nazwisko;
     
         """).cursor)
         return render_template('database.html', data = data)
