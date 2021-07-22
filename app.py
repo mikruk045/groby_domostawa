@@ -23,6 +23,13 @@ def rows_as_dicts(cursor):
     return [dict(zip(col_names, row)) for row in cursor]
 
 
+def WGS_json_from_db(columns, table, connection):
+    get_geom = "ST_AsGeoJSON(ST_Transform(geom, '+proj=tmerc +lat_0=0 +lon_0=19 +k=0.9993 +x_0=500000 +y_0=-5300000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs', 4326)) as geom"
+    dane = rows_as_dicts(connection.execute("""select {}, {} from {}""".format(columns, get_geom, table)).cursor)
+    dane = json.dumps(dane)
+    return dane
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -50,7 +57,7 @@ def cmentarz():
      """).cursor)
     kwatery = json.dumps(kwatery)
     zmarli = json.dumps(zmarli) 
-    data = [kwatery, zmarli]
+    data = [kwatery, zmarli, WGS_json_from_db("*", "kwatery", conn)]
     return render_template('cmentarz.html', dane = data)
 
 
@@ -69,6 +76,7 @@ def login():
                 haslo = rows_as_dicts(conn.execute(""" select haslo from administratorzy where id_admin = '{}'""".format(username)).cursor)[0]
                 if (check_password_hash(haslo['haslo'], password)):
                     session['id_admin'] = id_admina_get[0]
+                    session['imie_nazwisko'] = rows_as_dicts(conn.execute(""" select imie, nazwisko where id_admin = '{}' """.format(username)).cursor)[0]
                     return redirect(url_for('database'))
                 else:
                     render_template('login.html', komunikat = komunikat)
@@ -110,7 +118,8 @@ def record():
                 conn.execute(""" insert into zmarli (id, nazwisko, imie, data_urodzenia, data_zgonu, przyczyna, id_miejscowosc, nr_adres, id_admin, inf_dodat) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}') """.format(str(int(max_id[0]['max'])+1), nazwisko, imie,data_ur, data_zg, przyczyna, id_miejscowosci[0]['id_miejscowosci'], nr_adres, session.get('id_admin')['id_admin'], info_dodat))
 
             conn.execute(""" insert into zmarli_kwatery (id_kwatera, id, id_zmarly) VALUES ('{}', '{}', '{}') """.format(kwatera, str(int(max_id_2[0]['max'])+1), str(int(max_id[0]['max'])+1)))
-        return render_template('record.html')
+        data = [json.dumps(session['id_admin'], session['imie_nazwisko'])]
+        return render_template('record.html', data = data)
     else:
         return redirect('/login')
 
@@ -120,7 +129,7 @@ def database():
     conn = db.session.connection()
     if ('id_admin' in session):
         
-        data = rows_as_dicts(conn.execute(""" 
+        data1 = rows_as_dicts(conn.execute(""" 
         select zm.id, zm.imie, zm.nazwisko, TO_CHAR(zm.data_urodzenia, 'DD.MM.YYYY') as data_urodzenia, TO_CHAR(zm.data_zgonu, 'DD.MM.YYYY') as data_zgonu, zm.przyczyna, zm.inf_dodat, 
         miej.nazwa, zm.nr_adres, kw.id_kwatera, zm.id_admin, ad.status
         from zmarli zm
@@ -133,6 +142,8 @@ def database():
          order by zm.nazwisko;
     
         """).cursor)
+        data2 = [json.dumps(session['id_admin'], session['imie_nazwisko'])]
+        data = [data1, data2]
         return render_template('database.html', data = data)
     else:
         return redirect('/login')
@@ -175,7 +186,8 @@ def database_edit():
             else:
                 conn.execute(""" update zmarli set nazwisko = '{}', imie = '{}', data_urodzenia = '{}', data_zgonu = '{}', przyczyna = '{}', id_miejscowosc = '{}', nr_adres = '{}', id_admin = '{}', inf_dodat = '{}' where id = '{}' """.format(nazwisko, imie, data_ur, data_zg, przyczyna, id_miejscowosci, nr_adres, session.get('id_admin')['id_admin'], info_dodat, id_obiektu))
             conn.execute(""" update zmarli_kwatery id_kwatera = '{}' where id_zmarly = '{}' """.format(kwatera, id_obiektu))
-            return render_template('database.html')
+            data = [json.dumps(session['id_admin'], session['imie_nazwisko'])]
+            return render_template('database.html', data = data)
     else:
         return render_template('database.html')
 
@@ -208,7 +220,7 @@ def admin_database():
 def mass_database():
     conn = db.session.connection()
     if ('id_admin' in session):
-        data = rows_as_dicts(conn.execute("""
+        data1 = rows_as_dicts(conn.execute("""
 
         select * from msze
         order by data
@@ -219,10 +231,11 @@ def mass_database():
             godzina = request.form['czas']
             zamawiajacy = request.form['zamawiajacy']
             odprawia = request.form['odprawia']
-            ofiara = request.form['ofiara']
             data_str = data + ' ' + godzina
             data_obj = datetime.datetime.strptime(data_str, '%Y-%m-%d %H:%M')
-            conn.execute(""" insert into msze (data, zamawiajacy, odprawia, ofiara) VALUES ('{}', '{}', '{}', '{}') """.format(data_obj, zamawiajacy, odprawia, ofiara))
+            conn.execute(""" insert into msze (data, zamawiajacy, odprawia) VALUES ('{}', '{}', '{}') """.format(data_obj, zamawiajacy, odprawia))
+        data2 = [json.dumps(session['id_admin'], session['imie_nazwisko'])]
+        data = [data1, data2]
         return render_template('mass_database.html', data = data)
     else:
         return redirect('/login')
