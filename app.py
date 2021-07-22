@@ -145,7 +145,7 @@ def database_delete(id):
     conn.execute(""" delete form zmarli_kwatery where id_zmarly = '{}' """.format(id))
 
 
-@app.route('/database/', methods=['GET', 'POST'])
+@app.route('/database_edit/', methods=['GET', 'POST'])
 def database_edit():
     conn = db.session.connection()
     if request.method == 'POST':
