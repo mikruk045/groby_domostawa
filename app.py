@@ -118,8 +118,8 @@ def record():
                 conn.execute(""" insert into zmarli (id, nazwisko, imie, data_urodzenia, data_zgonu, przyczyna, id_miejscowosc, nr_adres, id_admin, inf_dodat) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}') """.format(str(int(max_id[0]['max'])+1), nazwisko, imie,data_ur, data_zg, przyczyna, id_miejscowosci[0]['id_miejscowosci'], nr_adres, session.get('id_admin')['id_admin'], info_dodat))
 
             conn.execute(""" insert into zmarli_kwatery (id_kwatera, id, id_zmarly) VALUES ('{}', '{}', '{}') """.format(kwatera, str(int(max_id_2[0]['max'])+1), str(int(max_id[0]['max'])+1)))
-        data = [json.dumps(session['id_admin']), json.dumps(session['imie_nazwisko'])]
-        return render_template('record.html', data = data)
+        data2 = [json.dumps(session['id_admin']), json.dumps(session['imie_nazwisko'])]
+        return render_template('record.html', data2 = data2)
     else:
         return redirect('/login')
 
@@ -185,8 +185,8 @@ def database_edit(id):
             else:
                 conn.execute(""" update zmarli set nazwisko = '{}', imie = '{}', data_urodzenia = '{}', data_zgonu = '{}', przyczyna = '{}', id_miejscowosc = '{}', nr_adres = '{}', id_admin = '{}', inf_dodat = '{}' where id = '{}' """.format(nazwisko, imie, data_ur, data_zg, przyczyna, id_miejscowosci[0]['id_miejscowosci'], nr_adres, session.get('id_admin')['id_admin'], info_dodat, id_obiektu))
             conn.execute(""" update zmarli_kwatery set id_kwatera = '{}' where id_zmarly = '{}' """.format(kwatera, id_obiektu))
-            data = [json.dumps(session['id_admin']), json.dumps(session['imie_nazwisko'])]
-            return render_template('database.html', data = data)
+            data2 = [json.dumps(session['id_admin']), json.dumps(session['imie_nazwisko'])]
+            return redirect(url_for('/database'))
     else:
         return render_template('database.html')
 
@@ -209,7 +209,8 @@ def admin_database():
             haslo = request.form['password']
             hash_haslo = generate_password_hash(haslo)
             conn.execute(""" insert into administratorzy (id_admin, nazwisko, imie, status, haslo) VALUES ('{}', '{}', '{}', '{}', '{}')""".format(id_admina, nazwisko, imie, status, hash_haslo))
-        return render_template('admin_database.html', data = data)
+        data2 = [json.dumps(session['id_admin']), json.dumps(session['imie_nazwisko'])]
+        return render_template('admin_database.html', data = data, data2 = data2)
     else:
         return redirect('/login')
 
