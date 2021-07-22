@@ -2,7 +2,7 @@
 
 function requestPOST(url){
     let test = new XMLHttpRequest();
-    test.open('post', url);
+    test.open('get', url);
     test.send();
     return test;
 }
@@ -47,7 +47,7 @@ for(let deleteButton of deleteButtons){
                     window.location.reload(true);
                 }else{
                     // window.location.reload(true);
-                    alert('błąd');
+                    // alert('błąd');
                 }
             })
         })

@@ -90,6 +90,7 @@ paginator({
     table: tabela,
     box: paginatorDiv,
     rows_per_page: 50,
+    disable:false,
   });
 
 let nextTr;
