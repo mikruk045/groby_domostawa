@@ -143,7 +143,7 @@ def database_delete(id):
     conn = db.session.connection()
     conn.execute(""" delete from zmarli where id = '{}' """.format(id))
     conn.execute(""" delete from zmarli_kwatery where id_zmarly = '{}' """.format(id))
-    return "done"
+    return "Rekord został usunięty"
 
 
 @app.route('/database_edit/', methods=['GET', 'POST'])
