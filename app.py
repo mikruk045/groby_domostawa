@@ -77,10 +77,13 @@ def login():
                 if (check_password_hash(haslo['haslo'], password)):
                     session['id_admin'] = id_admina_get[0]
                     session['imie_nazwisko'] = rows_as_dicts(conn.execute(""" select imie, nazwisko from administratorzy where id_admin = '{}' """.format(username)).cursor)[0]
+                    flash("Udało Ci się zalogować")
                     return redirect(url_for('database'))
                 else:
+                    flash("niepoprawy login lub hasło")
                     render_template('login.html', komunikat = komunikat)
         else:
+            flash("niepoprawy login lub hasło")
             render_template('login.html', komunikat = komunikat) 
     return render_template('login.html', komunikat = komunikat)
 
@@ -118,6 +121,7 @@ def record():
                 conn.execute(""" insert into zmarli (id, nazwisko, imie, data_urodzenia, data_zgonu, przyczyna, id_miejscowosc, nr_adres, id_admin, inf_dodat) VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}') """.format(str(int(max_id[0]['max'])+1), nazwisko, imie,data_ur, data_zg, przyczyna, id_miejscowosci[0]['id_miejscowosci'], nr_adres, session.get('id_admin')['id_admin'], info_dodat))
 
             conn.execute(""" insert into zmarli_kwatery (id_kwatera, id, id_zmarly) VALUES ('{}', '{}', '{}') """.format(kwatera, str(int(max_id_2[0]['max'])+1), str(int(max_id[0]['max'])+1)))
+            flash("Rekord został poprawnie dodany")
         data2 = [json.dumps(session['id_admin']), json.dumps(session['imie_nazwisko'])]
         return render_template('record.html', data2 = data2)
     else:
@@ -186,6 +190,7 @@ def database_edit(id):
                 conn.execute(""" update zmarli set nazwisko = '{}', imie = '{}', data_urodzenia = '{}', data_zgonu = '{}', przyczyna = '{}', id_miejscowosc = '{}', nr_adres = '{}', id_admin = '{}', inf_dodat = '{}' where id = '{}' """.format(nazwisko, imie, data_ur, data_zg, przyczyna, id_miejscowosci[0]['id_miejscowosci'], nr_adres, session.get('id_admin')['id_admin'], info_dodat, id_obiektu))
             conn.execute(""" update zmarli_kwatery set id_kwatera = '{}' where id_zmarly = '{}' """.format(kwatera, id_obiektu))
             data2 = [json.dumps(session['id_admin']), json.dumps(session['imie_nazwisko'])]
+            flash("Rekord został edytowany")
             return redirect(url_for('database'))
     else:
         return render_template('database.html')
@@ -210,6 +215,8 @@ def admin_database():
             hash_haslo = generate_password_hash(haslo)
             conn.execute(""" insert into administratorzy (id_admin, nazwisko, imie, status, haslo) VALUES ('{}', '{}', '{}', '{}', '{}')""".format(id_admina, nazwisko, imie, status, hash_haslo))
             #return redirect('/admin_database')
+            flash("nowy administrator został dodany")
+            return redirect('/admin_database')
         data2 = [json.dumps(session['id_admin']), json.dumps(session['imie_nazwisko'])]
         return render_template('admin_database.html', data = data, data2 = data2)
     else:
@@ -236,6 +243,7 @@ def mass_database():
             data_str = data + ' ' + godzina
             data_obj = datetime.datetime.strptime(data_str, '%Y-%m-%d %H:%M')
             conn.execute(""" insert into msze (data, zamawiajacy, odprawia) VALUES ('{}', '{}', '{}') """.format(data_obj, zamawiajacy, odprawia))
+            flash("Dodano mszę do rozkładu")
             return redirect('/mass_database')
         return render_template('mass_database.html', data = data, data2 = data2)
     else:
