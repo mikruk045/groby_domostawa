@@ -28,7 +28,7 @@ function messageOK(){
     let messageGreen = document.getElementById('messageGREEN');
     if(messageGreen !== null){
         let timer = document.getElementById('timer');
-        let licznik_czas = 10;
+        let licznik_czas = 5;
         timer.innerHTML = `<i>(${licznik_czas})</i>`;
         setInterval(()=>{
             licznik_czas -= 1;
@@ -36,7 +36,7 @@ function messageOK(){
         }, 1000)
         setTimeout(()=>{
             messageGreen.remove();
-        }, 10000);
+        }, 5000);
     }
 }
 
