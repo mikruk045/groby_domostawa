@@ -257,6 +257,7 @@ def mass_database():
 def delete_mass(date):
     conn = db.session.connection()
     conn.execute(""" delete from msze where data = '{}' """.format(date))
+    flash("Msza została usunięta z bazy")
     return "Msza zosała usunięta z bazy"
 
 
