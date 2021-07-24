@@ -122,6 +122,7 @@ def record():
 
             conn.execute(""" insert into zmarli_kwatery (id_kwatera, id, id_zmarly) VALUES ('{}', '{}', '{}') """.format(kwatera, str(int(max_id_2[0]['max'])+1), str(int(max_id[0]['max'])+1)))
             flash("Rekord został poprawnie dodany")
+            return redirect('/record')
         data2 = [json.dumps(session['id_admin']), json.dumps(session['imie_nazwisko'])]
         return render_template('record.html', data2 = data2)
     else:
