@@ -7,6 +7,10 @@
 {% block panelContent %}
 <h1>dodaj mszę </h1>
 
+{% for message in get_flashed_messages() %}
+<div class="messageGREEN" id="messageGREEN">{{ message }}</div>
+{% endfor %}
+
 <div class="flexRows">
     <form action="" method="post" id="form">
 

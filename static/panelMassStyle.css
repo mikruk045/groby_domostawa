@@ -6,12 +6,21 @@
     width: 60%;
 }
 
+@media screen and (max-width:1585px){
+    .massDateCont{
+        width: 56%;
+    }
+}
+
 @media screen and (max-width:1500px){
     .flexTableForm{
         gap: 50px;
         flex-direction: column-reverse;
     }
     .addMassForm{
+        width: 100%;
+    }
+    .massDateCont{
         width: 100%;
     }
 }

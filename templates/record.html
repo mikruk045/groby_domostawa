@@ -11,6 +11,10 @@
 </script>
 <div class="subdomainTitle">Dodaj zmarłego</div>
 
+{% for message in get_flashed_messages() %}
+<div class="messageGREEN" id="messageGREEN">{{ message }}</div>
+{% endfor %}
+
 <div class="flexRows flexBase">
     <div class="recordContainer">
         <form action="" method="post" id="form">

@@ -5,7 +5,7 @@
 }
 
 body, html{
-    font-family: 'Lato', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 12pt;
     width: 100%;
     height: 100%;
@@ -15,7 +15,9 @@ body, html{
 body{
     display: grid;
     grid-template-columns: 280px 1fr;
-    grid-template-areas: 
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+    "mobileNav mobileNav"
     "sidebar panelContent"
 }
 
@@ -28,6 +30,7 @@ body{
 .siteName2{
     font-weight: 400;
     color: rgb(165, 165, 165);
+    font-size: 0.8rem;
 }
 
 .crossIcon{
@@ -47,65 +50,73 @@ body{
     grid-area: panelContent;
     /* padding: 30px 50px; */
     overflow-y: auto;
-    background-color: rgb(249, 249, 249);
+    /* background-color: rgb(249, 249, 249); */
+    background-color: #f6f8fa;
 }
 
 .sidepanel{
     grid-area: sidebar;
-    background-color: #121212;
+    /* background-color: #121212;
+    color: #e7e7e7; */
+    background-color: #fff;
+    color: #121212;
+    border: 1px solid #cecece;
     z-index: 999;
     overflow-y: auto;
-    /* background-color: #fff;
-    border: 1px solid rgb(206, 206, 206, 0.9);
-    box-shadow: 0 0 10px rgba(172, 172, 172, 0.2); */
-    color: #e7e7e7;
+    
     padding: 30px 20px;
 }
 
 .category{
     font-size: 0.75rem;
     /* color: rgb(136, 136, 136); */
-    color: #cecece;
+    /* color: #cecece; */
+    color: #777777;
     font-weight: 600;
 }
 
 .menu{
     /* display: block; */
-    margin: 30px 0;
+    margin: 10px 0;
     
     /* grid-area: menuside; */
 }
 
 .menu > hr{
     border: 0;
-    border-top: 1px solid #cecece;
+    margin: 20px 0;
+    /* border-top: 1px solid #303030; */
+    border-top: 1px solid #ebedef;
 }
 
 .menu > a{
     display: block;
     width: 100%;
     text-decoration: none;
-    color: #fff;
+    color: #121212;
+    /* color: #006deb; */
     margin: 10px 0;
     font-size: 0.8rem;
+    /* font-weight: 550; */
     padding: 0.5rem 1rem;
     border-radius: 7px;
     transition: .2s linear;
 }
 
 .menu > a:hover{
-    background-color: #1e1e1e;
+    /* background-color: #1e1e1e; */
+    background-color: rgb(241, 241, 241);
 }
 
 .activeTab{
     font-weight: 700;
-    background-color: #1e1e1e;
+    background-color: rgb(241, 241, 241);
     cursor: default;
 }
 
 .subdomainTitle{
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+    font-size: 1.5rem;
+    margin-bottom: 50px;
     font-weight: 600;
 }
 
@@ -114,7 +125,14 @@ table {
     border-collapse: collapse;
     border-spacing: 15px;
     margin-bottom: 30px;
+    
+    /* background-color: #fff;
+    border: 1px solid #cecece;
+    border-radius: 35px; */
+    
 }
+
+
 
 table, td, th {
     /* border: 1px solid #cecece; */
@@ -126,11 +144,31 @@ th{
 }
 
 td {
+    /* background-color: #fff; */
     font-size: 1rem;
     text-align: center;
     border-bottom: 1px solid rgb(206, 206, 206, 0.6);
 }
 
+/* .columns{
+    background-color: #fff;
+} */
+
+/* .records:nth-child(odd){
+    background-color: #fff;
+} */
+
+.records{
+    cursor: pointer;
+}
+
+.focusedRecord{
+    background-color: #f0f0f0;
+}
+
+.focusedButton{
+    opacity: initial !important;
+}
 
 .przyczyna{
     text-align: left;
@@ -145,6 +183,8 @@ td {
     border: 0;
     /* display: none; */
     opacity: 0;
+    pointer-events: none;
+    user-select: none;
     /* display: block; */
     /* width: 25px; */
     height: 25px;
@@ -157,6 +197,12 @@ td {
     /* box-shadow: 0 0 10px rgb(121, 121, 121, 0.3); */
     /* border-radius: 100%; */
     position: relative;
+}
+
+.deleteVisible{
+    opacity: initial;
+    pointer-events: initial;
+    user-select: initial;
 }
 
 .delete:hover{
@@ -219,10 +265,15 @@ td {
 }
 
 .recordContainer{
-    /* padding: 3rem 8%; */
-    /* background-color: #fff; */
-    /* border: 1px solid #cecece; */
+    padding: 2rem 2rem;
+    background-color: #fff;
+    border: 1px solid #cecece;
     border-radius: 5px;
+    width: 100%;
+}
+
+.recordEdit{
+    padding: 2rem 2rem;
     width: 100%;
 }
 
@@ -308,26 +359,29 @@ td {
 
 .flexBase{
     flex-grow: 1;
+    /* gap: 50px; */
 }
 
 .inputValidationContent{
-    font-size: 00.85rem;
+    font-size: 00.8rem;
+    color: rgb(68, 68, 68);
 }
 
 .titleValidate{
+    color: #000;
     font-weight: 600;
     /* font-style: italic; */
     margin-bottom: 15px;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
 }
 
 .inputValidation{
     width: 50%;
-    border-left: 1px solid #cecece;
+    /* border-left: 1px solid #cecece; */
     /* background-color: #fff;
     border: 1px solid #cecece; */
     border-radius: 5px;
-    padding: 2rem 3rem;
+    padding: 0 3rem;
 }
 
 .validateList{
@@ -377,9 +431,7 @@ td {
 
 .messageInput{
     display: none;
-    /* margin: 10% 0; */
     font-size: 0.8rem;
-    /* width: 80%; */
     text-align: center;
     padding: 1em 10%;
     border-radius: 5px;
@@ -389,9 +441,17 @@ td {
     color: #932020;
 }
 
-.mobileNav{
-    display: none;
+.messageGREEN{
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 1em 10%;
+    border-radius: 5px;
+    margin-bottom: 40px;
+    border: 1px solid #badbcc;
+    background-color: #d1e7dd;
+    color: #0f5132;
 }
+
 
 .tablecontent{
     display: none;
@@ -488,9 +548,6 @@ td {
     transition: .2s linear;
 }
 
-.deleteButton{
-    /* background-color: #f94144; */
-}
 
 .noDeleteButton{
     background-color: #fff;
@@ -503,10 +560,107 @@ td {
 }
 
 .tdEdit{
-    padding: 2rem 4rem;
+    background-color: #f0f0f0;
+    padding: 2rem 0rem;
+    transition: .2s linear;
 }
 
+.name{
+    grid-area: name;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
 
+.nickname{
+    font-size: 0.7rem;
+    font-weight: 500;
+    font-style: italic;
+}
+
+.name > svg{
+    height: 15px;
+    margin-top: 1px;
+    /* margin: auto 0; */
+    fill: rgb(0, 0, 0);
+}
+
+.adminInfos{
+    display: grid;
+    margin-bottom: 34px;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+    "name . logout"
+}
+
+.logoutDiv{
+    grid-area: logout;
+    height: 100%;
+}
+
+.logoutDiv > a{
+    height: auto;
+    text-decoration: none;
+    background-color: rgb(0, 117, 250);
+    border-radius: 4px;
+    color: rgb(236, 236, 236);
+    font-weight: 600;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.7rem;
+    transition: .2s linear;
+}
+
+.logoutDiv >a:hover{
+    background-color: rgb(0, 84, 180);
+}
+
+.mobileNav{
+    /* background-color: #121214; */
+    background-color: #212529;
+    z-index: 999;
+    grid-area: mobileNav;
+    height: auto;
+    padding: 16px 20px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+    "mobileTitle . desktopMenu"
+
+}
+
+.mobileMenu{
+    grid-area: mobileMenu;
+    display: none;
+}
+
+.mobileTitle{
+    grid-area: mobileTitle;
+    white-space: nowrap;
+    margin: auto 30px auto 0;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.desktopMenu{
+    grid-area: desktopMenu;
+    display: flex;
+    flex-direction: row;
+    margin: auto 0;
+    gap: 15px;
+}
+
+.desktopMenu > a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.desktopMenu > a:hover {
+    color: #d3d3d3;
+}
 
 @media screen and (max-width:1300px){
     .flexBase{
@@ -517,6 +671,7 @@ td {
     .inputValidation{
         border-left: 0;
         width: 100%;
+        padding: 2rem 0;
         border-top: 1px solid #cecece;
     }
 }
@@ -524,38 +679,53 @@ td {
 @media screen and (max-width:830px){
     body{
         grid-template-columns: 1fr;
-        grid-template-rows: 50px auto 1fr;
+        grid-template-rows: auto auto 1fr;
         grid-template-areas: 
         "mobileNav"
         "sidebar"
         "panelContent"
     }
 
-    .sidepanel{
-        /* display: none; */
-    }
-    .panelInfo{
+    .desktopMenu{
         display: none;
     }
 
     .mobileNav{
-        background-color: #121212;
-        z-index: 999;
-        grid-area: mobileNav;
-        display: grid;
-        grid-template-columns: 1fr auto;
+        padding-left: 0;
+        padding-right: 0;
+        grid-template-columns: auto 1fr auto;
         grid-template-areas:
-        ". mobileMenu"
-        /* "dropdownmenu dropdownmenu" */
+        "mobileTitle . mobileMenu";
 
     }
 
+    .menu > hr{
+        border: 0;
+        margin: 20px 0;
+        /* border-top: 1px solid #303030; */
+        
+        border-top: 1px solid #191a1b;
+    }
+
+    .menu{
+        margin: 30px 0;
+    }
+
+    .menu > a{
+        color: #fff;
+    }
+
+    .activeTab{
+        background-color: #2a3035;
+    }
+
+
     .mobileMenu{
-        grid-area: mobileMenu;
-        height: auto;
+        display: block;
+        /* grid-area: mobileMenu; */
+        /* height: auto; */
         width: 100px;
         position: relative;
-        /* margin: 5% 15%; */
     }
 
     .mobileIcon{
@@ -588,17 +758,26 @@ td {
         height: 15px;
     }
 
+    .name{
+        color: #f0f0f0;
+    }
+
+    .name > svg{
+        fill: #f0f0f0;
+    }
+
     .sidepanel{
-        position:absolute;
+        position:relative;
         /* height: 50px; */
-        top: 49px;
+        top: 0;
         left: 0;
         margin: 0;
         padding: 0;
         width: 100%;
         /* height: 0; */
         max-height: 0;
-        background-color: #181818;
+        border: 0;
+        background-color: #24282c;
         transition: max-height 0.2s ease-out;
     }
 
@@ -623,7 +802,7 @@ td {
     }
 }
 
-@media screen and (max-width:480px){
+@media screen and (max-width:520px){
     .flexRows{
         flex-direction: column;
         margin-bottom: 0;
@@ -631,6 +810,10 @@ td {
     .flexContainer{
         margin-bottom: 2%;
     }
+}
+
+@media screen and (max-width:480px){
+
     table{
         font-size: 0.7rem;
     }
@@ -639,7 +822,7 @@ td {
     }
 }
 
-@media screen and (max-width:345px){
+@media screen and (max-width:350px){
     .mobileTitle{
         font-size: 0.6rem;
     }

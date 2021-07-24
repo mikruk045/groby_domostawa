@@ -75,7 +75,7 @@ function createExpand(record, id_row){
     }   
 
     let recordContainer = document.createElement('div');
-    recordContainer.classList.add('recordContainer');
+    recordContainer.classList.add('recordEdit');
     recordContainer.innerHTML = `        <form action="/database_edit/${id_row}" method="post" id="form">
     
     <div class="flexRows flexEditDatabase">
@@ -150,7 +150,7 @@ function createExpand(record, id_row){
     </div>
 
     <br></br>
-    <button class="inputSubmit" disabled type="submit">Dodaj</button>
+    <button class="inputSubmit" disabled type="submit">Edytuj</button>
 
 </form>`
     

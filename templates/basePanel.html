@@ -8,17 +8,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/panelStyle.css">
     <script src="/static/js/panelScript.js" defer></script>
-    <script>
-        let adminData = '{{ data2[1] | tojson }}';
-        adminData = adminData.substring(1, adminData.length-1);
-        adminData = JSON.parse(adminData);
 
-        let adminNick = '{{ data2[0] | tojson }}';
-        adminNick = adminNick.substring(1, adminNick.length-1);
-        adminNick = JSON.parse(adminNick);
-    </script>
     <!-- <script src=""></script> -->
     {% block head %}{% endblock %}
 </head>
@@ -41,6 +35,11 @@
         <div class="mobileTitle">
             Parafia pw. Matki Bożej Królowej Polski <br> <div class="siteName2">w Domostawie</div>
         </div>
+        <div class="desktopMenu">
+            <a href="#">Strona główna</a>
+            <a href="#">Cmentarz</a>
+            <a href="#">Kontakt</a>
+        </div>
         <div class="mobileMenu">
             <div class="mobileIcon">
                 <div class="mobileSVG">
@@ -53,24 +52,43 @@
     </div>
 
     <div class="sidepanel">
-        <div class="panelInfo">
+        <!-- <div class="panelInfo">
             <div class="siteName">Parafia pw. Matki Bożej Królowej Polski <br> <div class="siteName2">w Domostawie</div></div>
-        </div>
-        <div class="adminInfos">
-        </div>
+        </div> -->
+
         <div class="menu">
-            <a href="/">Strona główna</a>
-            <div class="category">Zmarli na cmentarzu</div>
+            <div class="adminInfos">
+                <div class="name"><svg version="1.1" baseProfile="basic" id="Warstwa_1" 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 2000 2000" 	 xml:space="preserve"> <path d="M219,1801c0-431.3,349.7-781,781-781s781,349.7,781,781"/> <circle cx="1000" cy="526" r="356"/> </svg> <div id="nameText"></div> </div>
+                <div class="logoutDiv"><a href="#">Wyloguj</a></div>
+            </div>
+            <script>
+                let adminData = '{{ data2[1] | tojson }}';
+                adminData = adminData.substring(1, adminData.length-1);
+                adminData = JSON.parse(adminData);
+        
+                let adminNick = '{{ data2[0] | tojson }}';
+                adminNick = adminNick.substring(1, adminNick.length-1);
+                adminNick = JSON.parse(adminNick);
+
+                document.getElementById('nameText').innerHTML += `${adminData['imie']} ${adminData['nazwisko']} <br> <div class='nickname'>${adminNick['id_admin']}</div>`;
+                // document.getElementById('nickname').innerHTML = `${adminNick['id_admin']}`;
+            </script>
             <hr>
+            <!-- <a href="/">Strona główna</a>
+            <hr> -->
+            <div class="category">Zmarli na cmentarzu</div>
+            
             <!-- <a class="activeTab">Lista zmarłych</a> -->
             <a id="listazmarlych" href="/database">Lista zmarłych</a>
             <a id="dodajzmarlego"  href="/record">Dodaj zmarłego</a>
-            <div class="category">Msze w kościele</div>
             <hr>
+            <div class="category">Msze w kościele</div>
+            
             <a id="przegladajmsze" href="/mass_database">Dodaj i przeglądaj msze</a>
             <!-- <a id="dodajmsze" href="/add_mass">Dodaj mszę</a> -->
-            <div class="category">Administratorzy</div>
             <hr>
+            <div class="category">Administratorzy</div>
+            
             <!-- <a id="dodajadmina" href="/new_admin">Dodaj administratora</a> -->
             <a id="przegladajadmina" href="/admin_database">Dodaj i przeglądaj administratorów</a>
             

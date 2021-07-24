@@ -12,33 +12,51 @@ function tableInteraction(deleteState){
         if(i !== -1){
             
             rows[i].addEventListener('click',()=>{
+                if(elemDOM === undefined){
+                    elemDOM = rows[i];
+                }
                 if(elemSelected === rows[i].id){
+                    elemDOM.classList.remove('focusedRecord');
+                    elemDOM.lastElementChild.children[0].classList.remove('focusedButton');
                     rows[i].blur();
                     if(typeof nextTr !== undefined){
                         nextTr.remove();
                     }
+                    elemDOM = undefined;
                     elemSelected = undefined;
                 }else{
+                    elemDOM.classList.remove('focusedRecord');
+                    if(deleteState === true){
+                        elemDOM.lastElementChild.children[0].classList.remove('focusedButton');
+                    }
+
                     rows[i].focus();
                     if(typeof createExpand === 'function'){
                         createExpand(rows[i], rows[i].id);
-                    }   
-                    
-                    elemSelected = rows[i].id;
+                    }
                     elemDOM = rows[i];
+                    console.log(elemDOM.lastElementChild.children[0]);
+                    elemDOM.classList.add('focusedRecord');
+                    if(deleteState === true){
+                        elemDOM.lastElementChild.children[0].classList.add('focusedButton');
+                    }
+                    elemSelected = rows[i].id;
+                    
                 }
                 
             })
             rows[i].addEventListener('mouseover', ()=>{
                 rows[i].style.backgroundColor = '#f0f0f0';
                 if(deleteState === true){
-                    rows[i].lastElementChild.children[0].style.opacity = 'initial';
+                    // rows[i].lastElementChild.children[0].style.opacity = 'initial';
+                    rows[i].lastElementChild.children[0].classList.add('deleteVisible');
                 }
             });
             rows[i].addEventListener('mouseout', ()=>{
                 rows[i].removeAttribute('style');
                 if(deleteState === true){
-                    rows[i].lastElementChild.children[0].removeAttribute('style');
+                    // rows[i].lastElementChild.children[0].removeAttribute('style');
+                    rows[i].lastElementChild.children[0].classList.remove('deleteVisible');
                 }
                 
             })
@@ -51,6 +69,11 @@ function tableInteraction(deleteState){
 function responsiveTable(site){
     if(site === 'database'){
         if(tabela.clientWidth < 1008){
+            if(elemDOM !== undefined){
+                if(typeof createExpand === 'function'){
+                    createExpand(elemDOM, elemDOM.id);
+                }
+            }
             let col7 = document.getElementsByClassName('col7');
             if(col7.length > 0){
                 for(let col of col7){
@@ -59,6 +82,11 @@ function responsiveTable(site){
             }
 
         }else{
+            if(elemDOM !== undefined){
+                if(typeof createExpand === 'function'){
+                    createExpand(elemDOM, elemDOM.id);
+                }
+            }
             let col7 = document.getElementsByClassName('col7');
             if(col7.length > 0){
                 for(let col of col7){
@@ -68,6 +96,11 @@ function responsiveTable(site){
 
         }
         if(tabela.clientWidth < 907){
+            if(elemDOM !== undefined){
+                if(typeof createExpand === 'function'){
+                    createExpand(elemDOM, elemDOM.id);
+                }
+            }
             let col9 = document.getElementsByClassName('col9')
             if(col9.length > 0){
                 for(let col of col9){
@@ -75,6 +108,11 @@ function responsiveTable(site){
                 }
             }
         }else{
+            if(elemDOM !== undefined){
+                if(typeof createExpand === 'function'){
+                    createExpand(elemDOM, elemDOM.id);
+                }
+            }
             let col9 = document.getElementsByClassName('col9');
             if(col9.length > 0){
                 for(let col of col9){
@@ -84,6 +122,11 @@ function responsiveTable(site){
 
         }
         if(tabela.clientWidth < 772){
+            if(elemDOM !== undefined){
+                if(typeof createExpand === 'function'){
+                    createExpand(elemDOM, elemDOM.id);
+                }
+            }
             // nextTr.remove();
             let col6 = document.getElementsByClassName('col6')
             if(col6.length > 0){
@@ -92,6 +135,11 @@ function responsiveTable(site){
                 }
             }
         }else{
+            if(elemDOM !== undefined){
+                if(typeof createExpand === 'function'){
+                    createExpand(elemDOM, elemDOM.id);
+                }
+            }
             // nextTr.remove();
             let col6 = document.getElementsByClassName('col6')
             if(col6.length > 0){
@@ -102,6 +150,11 @@ function responsiveTable(site){
 
         }
         if(tabela.clientWidth < 655){
+            if(elemDOM !== undefined){
+                if(typeof createExpand === 'function'){
+                    createExpand(elemDOM, elemDOM.id);
+                }
+            }
             // nextTr.remove();
             let col4 = document.getElementsByClassName('col4');
             if(col4.length > 0){
@@ -111,6 +164,11 @@ function responsiveTable(site){
             }
 
         }else{
+            if(elemDOM !== undefined){
+                if(typeof createExpand === 'function'){
+                    createExpand(elemDOM, elemDOM.id);
+                }
+            }
             // nextTr.remove();
             let col4 = document.getElementsByClassName('col4');
             if(col4.length > 0){
@@ -121,6 +179,11 @@ function responsiveTable(site){
 
         }
         if(tabela.clientWidth < 550){
+            if(elemDOM !== undefined){
+                if(typeof createExpand === 'function'){
+                    createExpand(elemDOM, elemDOM.id);
+                }
+            }
             // nextTr.remove();
             let col2 = document.getElementsByClassName('col2');
             if(col2.length > 0){
@@ -130,6 +193,11 @@ function responsiveTable(site){
             }
 
         }else{
+            if(elemDOM !== undefined){
+                if(typeof createExpand === 'function'){
+                    createExpand(elemDOM, elemDOM.id);
+                }
+            }
             // nextTr.remove();
             let col2 = document.getElementsByClassName('col2');
             if(col2.length > 0){
@@ -140,6 +208,11 @@ function responsiveTable(site){
 
         }
         if(tabela.clientWidth < 441){
+            if(elemDOM !== undefined){
+                if(typeof createExpand === 'function'){
+                    createExpand(elemDOM, elemDOM.id);
+                }
+            }
             // nextTr.remove();
             let col3 = document.getElementsByClassName('col3');
             if(col3.length > 0){
@@ -149,6 +222,11 @@ function responsiveTable(site){
             }
 
         }else{
+            if(elemDOM !== undefined){
+                if(typeof createExpand === 'function'){
+                    createExpand(elemDOM, elemDOM.id);
+                }
+            }
             // nextTr.remove();
             let col3 = document.getElementsByClassName('col3')
             if(col3.length > 0){
@@ -159,6 +237,11 @@ function responsiveTable(site){
 
         }
         if(tabela.clientWidth < 261){
+            if(elemDOM !== undefined){
+                if(typeof createExpand === 'function'){
+                    createExpand(elemDOM, elemDOM.id);
+                }
+            }
             // nextTr.remove();
             let col5 = document.getElementsByClassName('col5');
             if(col5.length > 0){
@@ -168,6 +251,11 @@ function responsiveTable(site){
             }
 
         }else{
+            if(elemDOM !== undefined){
+                if(typeof createExpand === 'function'){
+                    createExpand(elemDOM, elemDOM.id);
+                }
+            }
             // nextTr.remove();
             let col5 = document.getElementsByClassName('col5')
             if(col5.length > 0){

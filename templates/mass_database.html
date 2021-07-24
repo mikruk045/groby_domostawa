@@ -15,12 +15,17 @@
   document.getElementById('przegladajmsze').classList.add('activeTab');
 </script>
 <div class="subdomainTitle">Dodaj i przeglądaj intencje mszalne</div>
+
+{% for message in get_flashed_messages() %}
+<div class="messageGREEN" id="messageGREEN">{{ message }}</div>
+{% endfor %}
+
 <div class="flexRows flexTableForm">
   <div class="recordContainer addMassForm">
     <form action="/mass_database" method="post" id="form">
 
       <div class="flexRows">
-        <div class="flexContainer">
+        <div class="flexContainer massDateCont">
           <label class="requiredField" for="data">data mszy</label>
           <input class="inputText requiredInput" type="date" id="data" name="data" value="">
           <div class="messageInput"><span>Data mszy niepoprawna</span></div>
@@ -34,14 +39,14 @@
       <div class="flexRows">
         <div class="flexContainer">
           <label class="requiredField" for="zamawiajacy">Osoba/y zamawiająca</label>
-          <input class="inputText requiredInput" type="text" id="zamawiajacy" name="zamawiajacy" value="">
+          <input class="inputText requiredInput" type="text" id="zamawiajacy" placeholder="Osoba lub osoby zamawiające msze" name="zamawiajacy" value="">
           <div class="messageInput"><span>Przekroczono limit 500 znaków</span></div>
         </div>
       </div>
       <div class="flexRows">
         <div class="flexContainer">
           <label class="requiredField" for="odprawia">Odprawia</label>
-          <input class="inputText requiredInput" type="text" id="odprawia" name="odprawia" value="">
+          <input class="inputText requiredInput" type="text" id="odprawia" placeholder="Ksiądz odprawiający mszę" name="odprawia" value="">
           <div class="messageInput"><span>Przekroczono limit 500 znaków</span></div>
         </div>
         <!-- <div class="flexContainer">

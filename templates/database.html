@@ -39,12 +39,12 @@
   <tr class="records" id="{{d['id']}}">
     <td class="col0 nazwisko"><b>{{d['nazwisko']}}</b></td>
     <td class="col1 imie">{{d['imie']}}</td>
-    {% if d['data_urodzenia'] == '01.01.1800' %}
+    {% if (d['data_urodzenia'] == '01.01.1800' or d['data_urodzenia'] == None) %}
     <td class="col2 data_urodzenia noValue">-</td>
     {% else %}
     <td class="col2 data_urodzenia">{{d['data_urodzenia']}}</td>
     {% endif %}
-    {% if d['data_zgonu'] == '01.01.1800' %}
+    {% if (d['data_zgonu'] == '01.01.1800' or d['data_zgonu'] == None) %}
     <td class="col3 data_zgonu noValue">-</td>
     {% else %}
     <td class="col3 data_zgonu">{{d['data_zgonu']}}</td>
@@ -55,8 +55,8 @@
     <td class="col4 nr_adresu miejscowosc">{{d['nazwa']}} {{d['nr_adres']}}</td>
     {% endif %}
     <td class="col5 kwatera">{{d['id_kwatera']}}</td>
-    {% if d['przyczyna'] == 'Brak' %}
-    <td class="col6 przyczyna noValue">{{d['przyczyna']}}</td>
+    {% if (d['przyczyna'] == 'Brak' or d['przyczyna'] == '') %}
+    <td class="col6 przyczyna noValue">Brak</td>
     {% else %}
     <td class="col6 przyczyna">{{d['przyczyna']}}</td>
     {% endif %}

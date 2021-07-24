@@ -16,39 +16,43 @@
 </script>
 <div class="subdomainTitle">Dodaj i przeglądaj administratorów</div>
 
+{% for message in get_flashed_messages() %}
+<div class="messageGREEN" id="messageGREEN">{{ message }}</div>
+{% endfor %}
+
 <div class="flexRows flexTableForm">
 <div class="recordContainer addMassForm">
   <form action="" method="post" id="form">
     <div class="flexRows">
       <div class="flexContainer">
-        <label class="requiredField" for="imie">Imię administratora</label>
-        <input class="inputText requiredInput" type="text" id="imie" name="imie" value="">
+        <label class="requiredField" for="imie">Imię</label>
+        <input class="inputText requiredInput" type="text" id="imie" placeholder="Imię administratora" name="imie" value="">
         <div class="messageInput"><span>Imię może zawierać tylko litery</span></div>
       </div>
       <div class="flexContainer">
-        <label class="requiredField" for="nazwisko">Nazwisko administratora</label>
-        <input class="inputText requiredInput" type="text" id="nazwisko" name="nazwisko" value="">
+        <label class="requiredField" for="nazwisko">Nazwisko</label>
+        <input class="inputText requiredInput" type="text" id="nazwisko" placeholder="Nazwisko administratora" name="nazwisko" value="">
         <div class="messageInput"><span>Nazwisko może zawierać tylko litery</span></div>
       </div>
     </div>
     <div class="flexRows">
       <div class="flexContainer">
         <label class="requiredField" for="id_admina">Identyfikator administratora (używany jako login)</label>
-        <input class="inputText requiredInput" type="text" id="id_admina" name="id_admina" value="">
+        <input class="inputText requiredInput" type="text" id="id_admina" placeholder="Nazwa użytkownika" name="id_admina" value="">
         <div class="messageInput"><span>Nazwa użytkownika może zawierać tylko litery, cyfry oraz znaki specjalne _-.</span></div>
       </div>
     </div>
     <div class="flexRows">
       <div class="flexContainer">
         <label class="requiredField" for="status">Status administratora</label>
-        <input class="inputText requiredInput" type="text" id="status" name="status" value="">
+        <input class="inputText requiredInput" type="text" id="status" placeholder="Status nowego administratora" name="status" value="">
         <div class="messageInput"><span>Status może zawierać tylko litery</span></div>
       </div>
     </div>
     <div class="flexRows">
       <div class="flexContainer">
         <label class="requiredField" for="password">Hasło</label>
-        <input class="inputText requiredInput" type="text" id="password" name="password" value="">
+        <input class="inputText requiredInput" type="text" id="password" placeholder="Hasło administratora" name="password" value="">
         <div class="messageInput"><span>Hasło musi zawierać przynajmniej 1 wielką literę, 1 małą literę, jedną cyfrę oraz być dłuższe od 5 znaków</span></div>
       </div>
     </div>

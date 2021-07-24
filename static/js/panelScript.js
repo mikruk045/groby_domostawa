@@ -22,3 +22,10 @@ window.addEventListener('resize',()=>{
         
     }
 })
+
+
+// let messageGreen = document.getElementById('messageGREEN');
+
+// if(messageGreen !== null){
+//     messageGreen.in
+// }
