@@ -77,7 +77,6 @@ def login():
                 if (check_password_hash(haslo['haslo'], password)):
                     session['id_admin'] = id_admina_get[0]
                     session['imie_nazwisko'] = rows_as_dicts(conn.execute(""" select imie, nazwisko from administratorzy where id_admin = '{}' """.format(username)).cursor)[0]
-                    flash("Udało Ci się zalogować")
                     return redirect(url_for('database'))
                 else:
                     flash("niepoprawy login lub hasło")
