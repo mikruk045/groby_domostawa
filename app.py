@@ -158,6 +158,7 @@ def database_delete(id):
     conn = db.session.connection()
     conn.execute(""" delete from zmarli where id = '{}' """.format(id))
     conn.execute(""" delete from zmarli_kwatery where id_zmarly = '{}' """.format(id))
+    flash("Rekord został usunięty")
     return "Rekord został usunięty"
 
 
