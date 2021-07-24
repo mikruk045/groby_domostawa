@@ -21,6 +21,11 @@
     document.getElementById('listazmarlych').classList.add('activeTab');
 </script>
 <div class="subdomainTitle">Lista zmarłych</div>
+
+{% for message in get_flashed_messages() %}
+<div class="messageGREEN" id="messageGREEN">{{ message }} <span id="timer"></span></div>
+{% endfor %}
+
 <table id="table" style="width:100%">
   <tr class="columns">
     <th class="col0">Nazwisko</th>

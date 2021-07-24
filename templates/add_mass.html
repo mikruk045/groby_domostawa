@@ -8,7 +8,7 @@
 <h1>dodaj mszę </h1>
 
 {% for message in get_flashed_messages() %}
-<div class="messageGREEN" id="messageGREEN">{{ message }}</div>
+<div class="messageGREEN" id="messageGREEN">{{ message }} <span id="timer"></span></div>
 {% endfor %}
 
 <div class="flexRows">
