@@ -56,11 +56,10 @@ body{
 
 .sidepanel{
     grid-area: sidebar;
-    /* background-color: #121212;
-    color: #e7e7e7; */
-    background-color: #fff;
+    /* background-color: #fff; */
+    background-color: #24282c;
     color: #121212;
-    border: 1px solid #cecece;
+    /* border: 1px solid #cecece; */
     z-index: 999;
     overflow-y: auto;
     
@@ -85,32 +84,32 @@ body{
 .menu > hr{
     border: 0;
     margin: 20px 0;
-    /* border-top: 1px solid #303030; */
-    border-top: 1px solid #ebedef;
+    /* border-top: 1px solid #ebedef; */
+    border-top: 1px solid #191a1b;
 }
 
 .menu > a{
     display: block;
     width: 100%;
     text-decoration: none;
-    color: #121212;
-    /* color: #006deb; */
+    /* color: #121212; */
+    color: #fff;
     margin: 10px 0;
     font-size: 0.8rem;
-    /* font-weight: 550; */
-    padding: 0.5rem 1rem;
-    border-radius: 7px;
+    padding: 0.7rem 1rem;
+    border-radius: 4px;
     transition: .2s linear;
 }
 
 .menu > a:hover{
-    /* background-color: #1e1e1e; */
-    background-color: rgb(241, 241, 241);
+    /* background-color: rgb(241, 241, 241); */
+    background-color: #2a3035;
 }
 
 .activeTab{
     font-weight: 700;
-    background-color: rgb(241, 241, 241);
+    /* background-color: rgb(241, 241, 241); */
+    background-color: #2a3035;
     cursor: default;
 }
 
@@ -572,6 +571,7 @@ td {
     gap: 5px;
     font-weight: 600;
     font-size: 0.8rem;
+    color: #f0f0f0;
 }
 
 .nickname{
@@ -583,8 +583,8 @@ td {
 .name > svg{
     height: 15px;
     margin-top: 1px;
-    /* margin: auto 0; */
-    fill: rgb(0, 0, 0);
+    /* fill: rgb(0, 0, 0); */
+    fill: #f0f0f0;
 }
 
 .adminInfos{
@@ -676,7 +676,7 @@ td {
     }
 }
 
-@media screen and (max-width:830px){
+@media screen and (max-width:856px){
     body{
         grid-template-columns: 1fr;
         grid-template-rows: auto auto 1fr;
@@ -713,6 +713,10 @@ td {
 
     .menu > a{
         color: #fff;
+    }
+
+    .menu > a:hover{
+        background-color: #2a3035;
     }
 
     .activeTab{
