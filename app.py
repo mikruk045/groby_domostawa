@@ -24,7 +24,7 @@ def rows_as_dicts(cursor):
 
 
 def WGS_json_from_db(columns, table, connection):
-    get_geom = "ST_AsGeoJSON(ST_Transform(geom, '+proj=tmerc +lat_0=0 +lon_0=19 +k=0.9993 +x_0=500000 +y_0=-5300000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs', 4326)) as geom"
+    get_geom = "ST_AsGeoJSON(ST_Transform(geometria, '+proj=tmerc +lat_0=0 +lon_0=19 +k=0.9993 +x_0=500000 +y_0=-5300000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs', 4326)) as geom"
     dane = rows_as_dicts(connection.execute("""select {}, {} from {}""".format(columns, get_geom, table)).cursor)
     dane = json.dumps(dane)
     return dane
