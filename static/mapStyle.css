@@ -87,3 +87,19 @@ body, html {
   .ol-touch .rotate-north {
     top: 10px;
   }
+
+
+  @media screen and (max-width: 900px) {
+    .wrapper{
+        width: 100vw;
+        height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 30% 1fr;
+        grid-template-areas: 
+        "mobileNav"
+        "secondNav"
+        "sidePanelCm"
+        "mapa"
+    }
+  }
