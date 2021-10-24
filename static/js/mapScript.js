@@ -199,32 +199,35 @@ mapa.on('pointermove', function (evt) {
 
 mapa.on('click', (evt) => {
     grobyLayer.getFeatures(evt.pixel).then((features) => {
+        highlighted = features[0];
         if(features.length === 0){
             unselectGrave();
+        }else{
+            unselectGrave();
+            selectedLayer.getSource().addFeature(features[0]);
+            let id_zmarlego = features[0].get('layer_id');
+            let sidePanelCm = document.getElementById('sidePanelCm');
+            for(let zmarly of searchByID(id_zmarlego)){
+                
+                let card = document.createElement('div');
+                card.style.width = '100%';
+                card.innerHTML = `
+                <div class="card text-dark bg-light mb-3" style="max-width: 100%;">
+      <div class="card-header">Kwatera ${zmarly.id_kwatera}</div>
+      <div class="card-body">
+        <h5 class="card-title">${zmarly.imie} ${zmarly.nazwisko}</h5>
+        <h6 class=" mb-2 text-muted">${zmarly.data_urodzenia} - ${zmarly.data_zgonu}</h6>
+        <p class="card-text"></p>
+      </div>
+    </div>`
+              sidePanelCm.appendChild(card);
+            }
         }
-    })
-    if(highlighted !== undefined){
-        unselectGrave();
-        selectedLayer.getSource().addFeature(highlighted);
-        let id_zmarlego = highlighted.get('layer_id');
-        let sidePanelCm = document.getElementById('sidePanelCm');
 
-        for(let zmarly of searchByID(id_zmarlego)){
-            
-            let card = document.createElement('div');
-            card.style.width = '100%';
-            card.innerHTML = `
-            <div class="card text-dark bg-light mb-3" style="max-width: 100%;">
-  <div class="card-header">Kwatera ${zmarly.id_kwatera}</div>
-  <div class="card-body">
-    <h5 class="card-title">${zmarly.imie} ${zmarly.nazwisko}</h5>
-    <h6 class=" mb-2 text-muted">${zmarly.data_urodzenia} - ${zmarly.data_zgonu}</h6>
-    <p class="card-text"></p>
-  </div>
-</div>`
-          sidePanelCm.appendChild(card);
-        }
-    }
+
+    })
+    
+
 })
 
 // document.getElementById('closeButton').addEventListener('click',()=>{
