@@ -23,7 +23,99 @@
   </script>
 </head>
 <body>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger no-display" id="no-value" role="alert">
+            Brak wyników. Spróbuj ponownie.
+          </div>
+          <!-- <label>Imię</label>
+          <input class="inputText" placeholder="Wpisz imię zmarłego"> -->
+          <form class="needs-validation" novalidate="">
+            <div class="row g-3">
+              <div class="col-sm-6 labls">
+                <label for="firstName" class="form-label">Imię</label>
+                <input type="text" class="form-control inputText" id="filter-imie" placeholder="" value="" required="">
+              </div>
+  
+              <div class="col-sm-6 labls">
+                <label for="lastName" class="form-label">Nazwisko</label>
+                <input type="text" class="form-control inputText" id="filter-nazwisko" placeholder="" value="" required="">
+              </div>
+  
+              <div class="col-12 labls">
+                <label for="address" class="form-label">Miejscowość zamieszkania</label>
+                <input type="text" class="form-control inputText" id="filter-msc" placeholder="" required="">
+              </div>
+  
+              <div class="col-sm-6 labls">
+                <label for="firstName" class="form-label">Data urodzenia</label>
+                <input type="date" class="form-control inputText" id="filter-urodzenie" placeholder="" value="" required="">
+              </div>
+  
+              <div class="col-sm-6 labls">
+                <label for="lastName" class="form-label">Data śmierci</label>
+                <input type="date" class="form-control inputText" id="filter-smierc" placeholder="" value="" required="">
+              </div>
+
+              <div class="col-md-3 labls">
+                <label for="zip" class="form-label">Sektor</label>
+                <input type="text" class="form-control inputText" id="filter-sektor" placeholder="" required="">
+              </div>
+  
+              <div class="col-md-5 labls">
+                <label for="state" class="form-label">Rząd</label>
+                <input type="text" class="form-control inputText" id="filter-rzad" placeholder="" required="">
+              </div>
+  
+              <div class="col-md-4 labls">
+                <label for="country" class="form-label">Numer kwatery</label>
+                <input type="text" class="form-control inputText" id="filter-kw" placeholder="" required="">
+              </div>
+
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="inputSubmit noDeleteButton" id="clearfilter">Wyczyść pola</button>
+          <button type="button" id="filter-wyszukaj" class="inputSubmit">Wyszukaj</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="wrapper">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark" style="grid-area: firstnav;" aria-label="Fourth navbar example">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <div class="mobileTitle">
+          Parafia pw. Matki Bożej Królowej Polski <br> <div class="siteName2">w Domostawie</div>
+        </div>
+      </a>
+      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="navbar-collapse collapse" id="navbarsExample04" style="margin-left: auto;">
+        <ul class="navbar-nav mb-2 mb-md-0" style="margin-left: auto;">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/">Strona główna</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/cmentarz">Cmentarz</a>
+          </li> 
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#">Kontakt</a>
+          </li> -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- <div class="wrapper">
     <div class="mobileNav nav">
       <div class="mobileTitle">
           Parafia pw. Matki Bożej Królowej Polski <br> <div class="siteName2">w Domostawie</div>
@@ -42,18 +134,28 @@
           </div>
           
       </div>
-  </div>
+  </div> -->
   <div class="secondNav">
-    <!-- <input class="inputText search" placeholder="Nazwa użytkownika">
-    <input class="inputSubmit searchButton" class="btn btn-default" type="submit" value="Wyszukaj"> -->
+    <!-- <input class="inputText search" placeholder="Wpisz imię zmarłego"> -->
+    <button class="inputSubmit searchButton" data-bs-toggle="modal" data-bs-target="#exampleModal">Wyszukaj zmarłego</button>
   </div>
-  <div class="sidePanelCm" id="sidePanelCm-all">
-    <!-- <button type="button" id="closeButton"  class="btn-close" aria-label="Close"></button> -->
+  <!-- <div class="sidePanelCm" id="sidePanelCm-all">
+    <button type="button" id="closeButton"  class="btn-close" aria-label="Close"></button>
     <div id="sidePanelCm">
 
     </div>
-  </div>
-    <div id="map"></div>
+  </div> -->
+    <div id="map">
+      <div class="sidePanelCm" id="sidePanelCm-all">
+        <div class="flexClose">
+          <button type="button" id="closeButton"  class="btn-close" aria-label="Close"></button>
+        </div>
+        
+        <div id="sidePanelCm">
+
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 </html>
